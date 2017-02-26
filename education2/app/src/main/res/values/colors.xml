@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <!-- 文字蓝色 -->
+    <color name="text_color_blue">#49b5fa</color>
+    <!-- 文字黑色 -->
+    <color name="text_color_black">#515151</color>
+    <!-- 文字灰色 -->
+    <color name="text_color_grey">#a9abac</color>
+    <!-- 文字橘色 -->
+    <color name="text_color_orange">#ff7733</color>
+    <color name="transparent">#00000000</color>
+    <color name="viewfinder_frame">#00ff00</color>
+    <color name="viewfinder_laser">#ffff0000</color>
+    <color name="viewfinder_mask">#60000000</color>
+    <color name="result_view">#b0000000</color>
+    <color name="possible_result_points">#c0ffff00</color>
+    <color name="blue_bg">#47ace6</color>
+    <color name="orange_bg">#E96B5A</color>
+    <color name="white">#ffffff</color>
+    <color name="light_gray">#888888</color>
+    <color name="red">#ff0000</color>
+    <color name="orange1">#f0ad4e</color>
+    <color name="text_gray">#666666</color>
+    <color name="text_black">#0e73b4</color>
+    <color name="dialogTxtColor">#0048fc</color>
+
+
+    <!--我的-->
+    <color name="text_bg">#444444</color>
+    <color name="view_bg">#f4f4f4</color>
+
+    <!--首页-->
+    <color name="title_bg">#191919</color>
+    <color name="tab_select">#4BA0F7</color><!--tab选中颜色-->
+    <color name="weak_bg">#999999</color><!--导航左边的线条-->
+    <color name="blue_item">#4BA0F7</color><!--蓝条-->
+    <color name="more">#B4B4B4</color><!--更多-->
+    <color name="item_text">#444444</color><!-- 推荐item字体-->
+    <color name="class_price">#E83333</color><!-- 推荐item字体-->
+    <color name="hot_time_price_color">#969696</color><!-- 人气 时间 价格的字体颜色-->
+    <color name="divider_color">#f2f2f2</color><!--分割线-->
+    <color name="RadioGroup_bg">#FAFAFA</color><!--RadioGroup的背景-->
+    <color name="RadioButton_bg">#969696</color><!--RadioGroup的字体-->
+    <color name="tab_bg">#EBEBEB</color><!--RadioGroup的字体-->
+    <color name="item_bg">#646464</color><!--学习中心的字体-->
+
+
+    <!-- 黑色 -->
+    <color name="black">#191919</color>
+    <!-- 统一textview颜色 -->
+    <color name="tongyi_textcolor">#999999</color>
+    <color name="video_textcolor">#666666</color>
+    <color name="tongyi_textcolor1">#333333</color>
+    <!-- 统一评论时间 -->
+    <color name="tongyi_comment">#999999</color>
+    <!-- 直播详情背景色 -->
+    <color name="video_bg">#f4f4f4</color>
+    <!-- 统一简介颜色 -->
+    <color name="tongyi_jianjie">#EEEEEE</color>
+    <color name="tongyi_jianjie1">#dddddd</color>
+    <color name="evalaute_color">#999999</color>
+    <!-- 灰色透明 -->
+    <color name="gray_transparent">#e0000000</color>
+    <!-- 浅灰透明 -->
+    <color name="light_gray_transparent">#22000000</color>
+    <!-- tab文字显示颜色 -->
+    <color name="tab_text_color">#6f6f6f</color>
+    <!-- tab文字选中颜色 -->
+    <color name="tab_text_select_color">#47aef1</color>
+    <!-- 课程名称颜色 -->
+    <color name="subject_title_color">#2fa5f1</color>
+    <color name="bg_color">#f2f2f2</color>
+    <color name="div_color">#dddddd</color>
+    <color name="bg_color1">#999999</color>
+    <color name="transparent_black">#33000000</color>
+    <color name="orange">#ff9929</color>
+    <color name="light_white">#a6d9fa</color>
+    <color name="light_blue">#effcff</color>
+    <color name="pink">#f19ec2</color>
+    <color name="title_bg_color">#49b5fa</color>
+    <color name="green">#56bf4b</color>
+    <color name="layout_bg_color">#f1f1f1</color>
+    <color name="light_black">#555555</color>
+    <color name="light_orange">#e9b25a</color>
+    <color name="live_red">#e96b5a</color>
+    <color name="live_yellow">#e9b25a</color>
+    <color name="live_gray">#cccccc</color>
+    <color name="holo_blue_bright">#ff00ddff</color>
+    <color name="holo_green_light">#ff99cc00</color>
+    <color name="holo_orange_light">#ffffbb33</color>
+    <color name="holo_red_light">#ffff4444</color>
+    <color name="message_time_color">#969696</color>
+    <color name="message_title_color">#969696</color>
+    <color name="message_line_color">#CFCFCF</color>
+</resources>
+

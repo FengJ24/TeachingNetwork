@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <FrameLayout
+        android:id="@+id/main_framelayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+    </FrameLayout>
+    <View
+        android:layout_width="match_parent"
+        android:background="@color/more"
+        android:layout_height="1dp"/>
+    <RadioGroup
+        android:id="@+id/main_rg"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/main_rb_fisrstpage"
+            style="@style/RadioButtonStyle"
+            android:drawablePadding="3dp"
+            android:drawableTop="@drawable/selector_rb_fisrstpage_icon"
+            android:text="理工要闻"
+            />
+
+        <RadioButton
+            android:id="@+id/main_rb_discover"
+            style="@style/RadioButtonStyle"
+            android:drawablePadding="3dp"
+            android:drawableTop="@drawable/selector_rb_discover_icon"
+            android:text="教学网"
+            />
+
+
+        <RadioButton
+            android:id="@+id/main_rb_me"
+            style="@style/RadioButtonStyle"
+            android:drawablePadding="3dp"
+            android:drawableTop="@drawable/selector_rb_me_icon"
+            android:text="我的"
+            />
+    </RadioGroup>
+
+
+    <!--<EditText-->
+        <!--android:id="@+id/account"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--/>-->
+
+    <!--<EditText-->
+        <!--android:id="@+id/passwrd"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--/>-->
+
+    <!--<Button-->
+        <!--android:id="@+id/login"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"/>-->
+</LinearLayout>
