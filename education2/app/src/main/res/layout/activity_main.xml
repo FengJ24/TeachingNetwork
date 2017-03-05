@@ -14,58 +14,119 @@
         android:layout_height="0dp"
         android:layout_weight="1">
     </FrameLayout>
+
     <View
         android:layout_width="match_parent"
-        android:background="@color/more"
-        android:layout_height="1dp"/>
-    <RadioGroup
-        android:id="@+id/main_rg"
+        android:layout_height="1dp"
+        android:background="@color/more"/>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:gravity="center_vertical"
+        android:layout_height="50dp"
         android:orientation="horizontal">
 
-        <RadioButton
-            android:id="@+id/main_rb_fisrstpage"
-            style="@style/RadioButtonStyle"
-            android:drawablePadding="3dp"
-            android:drawableTop="@drawable/selector_rb_fisrstpage_icon"
-            android:text="理工要闻"
-            />
+        <LinearLayout
+            android:id="@+id/tab_linearlayout1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingTop="5dp">
 
-        <RadioButton
-            android:id="@+id/main_rb_discover"
-            style="@style/RadioButtonStyle"
-            android:drawablePadding="3dp"
-            android:drawableTop="@drawable/selector_rb_discover_icon"
-            android:text="教学网"
-            />
+            <ImageView
+                android:id="@+id/activity_fragment_tab1_imageview"
+                android:layout_width="@dimen/mainChooseIcon"
+                android:layout_height="@dimen/mainChooseIcon"
+                android:scaleType="fitCenter"
+                android:src="@drawable/main_rb_bg_first_select"/>
 
+            <TextView
+                android:id="@+id/tab_textview1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="理工要闻"
+                android:textColor="@color/blue_item"
+                android:textSize="12sp"/>
 
-        <RadioButton
-            android:id="@+id/main_rb_me"
-            style="@style/RadioButtonStyle"
-            android:drawablePadding="3dp"
-            android:drawableTop="@drawable/selector_rb_me_icon"
-            android:text="我的"
-            />
-    </RadioGroup>
+        </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/tab_linearlayout2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingTop="5dp">
 
-    <!--<EditText-->
-        <!--android:id="@+id/account"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--/>-->
+            <ImageView
+                android:id="@+id/activity_fragment_tab2_imageview"
+                android:layout_width="@dimen/mainChooseIcon"
+                android:layout_height="@dimen/mainChooseIcon"
+                android:scaleType="fitCenter"
+                android:src="@drawable/main_rb_bg_discover_unselect"/>
 
-    <!--<EditText-->
-        <!--android:id="@+id/passwrd"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--/>-->
+            <TextView
+                android:id="@+id/tab_textview2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="教学网"
+                android:textColor="@color/RadioButton_bg"
+                android:textSize="12sp"/>
 
-    <!--<Button-->
-        <!--android:id="@+id/login"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"/>-->
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/tab_linearlayout3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingTop="5dp">
+
+            <ImageView
+                android:id="@+id/activity_fragment_tab3_imageview"
+                android:layout_width="@dimen/mainChooseIcon"
+                android:layout_height="@dimen/mainChooseIcon"
+                android:scaleType="centerCrop"
+                android:src="@drawable/school_scene_no_choose"/>
+
+            <TextView
+                android:id="@+id/tab_textview3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="校园风光"
+                android:textColor="@color/RadioButton_bg"
+                android:textSize="12sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/tab_linearlayout4"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingTop="5dp">
+
+            <ImageView
+                android:id="@+id/activity_fragment_tab4_imageview"
+                android:layout_width="@dimen/mainChooseIcon"
+                android:layout_height="@dimen/mainChooseIcon"
+                android:scaleType="fitCenter"
+                android:src="@drawable/main_rb_bg_me_unselect"/>
+
+            <TextView
+                android:id="@+id/tab_textview4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="我的"
+                android:textColor="@color/RadioButton_bg"
+                android:textSize="12sp"/>
+
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>
