@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/layout_base_title"/>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="200dp">
+
+        </android.support.v4.view.ViewPager>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.2dp"
+                android:background="@color/more"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/school_news"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/newFragmentIcon"
+                        android:layout_height="@dimen/newFragmentIcon"
+                        android:src="@drawable/guide_3"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:text="校园新闻"
+                        android:textColor="@color/newFragmentText"
+                        android:textSize="16sp"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="0.2dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/more"/>
+
+                <LinearLayout
+                    android:id="@+id/teah_stydy"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/newFragmentIcon"
+                        android:layout_height="@dimen/newFragmentIcon"
+                        android:src="@drawable/guide_1"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:text="教学科研"
+                        android:textColor="@color/newFragmentText"
+                        android:textSize="16sp"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="0.2dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/more"/>
+
+                <LinearLayout
+                    android:id="@+id/Student_activity"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/newFragmentIcon"
+                        android:layout_height="@dimen/newFragmentIcon"
+                        android:src="@drawable/guide_2"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:text="学生活动"
+                        android:textColor="@color/newFragmentText"
+                        android:textSize="16sp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.2dp"
+                android:background="@color/more"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/university_culture"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/newFragmentIcon"
+                        android:layout_height="@dimen/newFragmentIcon"
+                        android:src="@drawable/guide_4"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:text="大学文化"
+                        android:textColor="@color/newFragmentText"
+                        android:textSize="16sp"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="0.2dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/more"/>
+
+                <LinearLayout
+                    android:id="@+id/ligong_fengcai"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/newFragmentIcon"
+                        android:layout_height="@dimen/newFragmentIcon"
+                        android:src="@drawable/guide_6"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:text="理工风采"
+                        android:textColor="@color/newFragmentText"
+                        android:textSize="16sp"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="0.2dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/more"/>
+
+                <LinearLayout
+                    android:id="@+id/dang_zheng"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/newFragmentIcon"
+                        android:layout_height="@dimen/newFragmentIcon"
+                        android:src="@drawable/guide_7"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:text="党政实事"
+                        android:textColor="@color/newFragmentText"
+                        android:textSize="16sp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.2dp"
+                android:background="@color/more"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

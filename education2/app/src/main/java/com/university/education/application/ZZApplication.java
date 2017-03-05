@@ -3,6 +3,11 @@ package com.university.education.application;
 import android.app.Activity;
 import android.app.Application;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.university.education.R;
+
 import java.util.ArrayList;
 
 public class ZZApplication extends Application{
@@ -32,21 +37,21 @@ public class ZZApplication extends Application{
 //		JPushInterface.setDebugMode(false); // 设置开启日志,发布时请关闭日志
 //		JPushInterface.init(this); // 初始化 JPush
 //
-//		DisplayImageOptions defaultOptions = new DisplayImageOptions
-//				.Builder()
-//				.showImageForEmptyUri(R.drawable.loading_image)
-//				.showImageOnFail(R.drawable.loading_image)
-//				.cacheInMemory(true)
-//				.cacheOnDisc(true)
-//				.build();
-//		ImageLoaderConfiguration config = new ImageLoaderConfiguration
-//				.Builder(getApplicationContext())
-//				.defaultDisplayImageOptions(defaultOptions)
-//				.discCacheSize(50 * 1024 * 1024)//
-//				.discCacheFileCount(100)//缓存一百张图片
-//				.writeDebugLogs()
-//				.build();
-//		ImageLoader.getInstance().init(config);
+		DisplayImageOptions defaultOptions = new DisplayImageOptions
+				.Builder()
+				.showImageForEmptyUri(R.drawable.loading_image)
+				.showImageOnFail(R.drawable.loading_image)
+				.cacheInMemory(true)
+				.cacheOnDisc(true)
+				.build();
+		ImageLoaderConfiguration config = new ImageLoaderConfiguration
+				.Builder(getApplicationContext())
+				.defaultDisplayImageOptions(defaultOptions)
+				.discCacheSize(50 * 1024 * 1024)//
+				.discCacheFileCount(100)//缓存一百张图片
+				.writeDebugLogs()
+				.build();
+		ImageLoader.getInstance().init(config);
 //		new Thread(new Runnable() {
 //            @Override
 //            public void run() {

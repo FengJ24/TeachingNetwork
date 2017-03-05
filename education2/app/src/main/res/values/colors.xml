@@ -50,6 +50,8 @@
 
     <!-- 黑色 -->
     <color name="black">#191919</color>
+    <color name="newFragmentText">#191919</color>
+
     <!-- 统一textview颜色 -->
     <color name="tongyi_textcolor">#999999</color>
     <color name="video_textcolor">#666666</color>
