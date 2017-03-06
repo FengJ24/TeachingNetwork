@@ -188,7 +188,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 changeTabColor(1);
                 break;
             case R.id.tab_linearlayout3:
-                baseFragment = fragmentList.get(0);
+                baseFragment = fragmentList.get(2);
                 //每次切换,将上一个隐藏掉
                 mSupportFragmentManager.beginTransaction().hide(lastFragment).commit();
                 if (baseFragment.isAdded()) {
@@ -254,7 +254,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             activity_fragment_tab1_imageview.setImageResource(R.drawable.main_rb_bg_first_unselect);
             activity_fragment_tab2_imageview.setImageResource(R.drawable.main_rb_bg_discover_unselect);
             activity_fragment_tab3_imageview.setImageResource(R.drawable.school_scene_choose);
-            activity_fragment_tab4_imageview.setImageResource(R.drawable.main_rb_bg_me_select);
+            activity_fragment_tab4_imageview.setImageResource(R.drawable.main_rb_bg_me_unselect);
             tab_textview1.setTextColor(getResources().getColor(R.color.RadioButton_bg));
             tab_textview2.setTextColor(getResources().getColor(R.color.RadioButton_bg));
             tab_textview3.setTextColor(getResources().getColor(R.color.blue_item));

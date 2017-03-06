@@ -1,22 +1,29 @@
 package com.university.education.fragment;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Handler;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.university.education.R;
 import com.university.education.UI.NewsBanner.FirstBanner;
+import com.university.education.UI.WebviewActivity;
+import com.university.education.adapter.PerfectArticleAdapter;
 import com.university.education.base.BaseFragment;
 import com.university.education.base.BaseNewsBannerPager;
 import com.university.education.bean.NewsFragmenBean;
 import com.university.education.httpEngine.NewsModule;
+import com.university.education.view.ListViewForScrollView;
 
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -44,6 +51,7 @@ public class NewsFragment extends BaseFragment implements View.OnClickListener {
     private LinearLayout ligong_fengcai;
     private LinearLayout dang_zheng;
     private ArrayList<NewsFragmenBean> mNewsFragmenBeenList;
+    private ArrayList<NewsFragmenBean> mNewsFragmenArticleList;
     private final int SHOW_NEXT_PAGE = 1;
     private Handler handler = new Handler() {
         public void handleMessage(android.os.Message msg) {
@@ -55,6 +63,7 @@ public class NewsFragment extends BaseFragment implements View.OnClickListener {
         }
     };
     private boolean isSend;
+    private ListViewForScrollView listview;
 
     @Override
     public View initView(Activity activity) {
@@ -72,6 +81,7 @@ public class NewsFragment extends BaseFragment implements View.OnClickListener {
         this.university_culture = (LinearLayout) rootView.findViewById(R.id.university_culture);
         this.ligong_fengcai = (LinearLayout) rootView.findViewById(R.id.ligong_fengcai);
         this.dang_zheng = (LinearLayout) rootView.findViewById(R.id.dang_zheng);
+        this.listview = (ListViewForScrollView) rootView.findViewById(R.id.listview);
         base_activity_back.setVisibility(View.INVISIBLE);
         base_name.setText("理工要闻");
         return inflate;
@@ -80,6 +90,7 @@ public class NewsFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public void initDate() {
         mNewsFragmenBeenList = new ArrayList<>();
+        mNewsFragmenArticleList = new ArrayList<>();
         netWork();
 
     }
@@ -94,7 +105,8 @@ public class NewsFragment extends BaseFragment implements View.OnClickListener {
      * 网络请求
      */
     private void netWork() {
-        new NewsModule(activity).getSchoolNewsData(new NewsModule.NewsResponseListener() {
+        NewsModule newsModule = new NewsModule(activity);
+        newsModule.getSchoolNewsData(new NewsModule.NewsResponseListener() {
             @Override
             public void success(Document document) {
                 Element carousel = document.select("div#carousel").first();
@@ -110,6 +122,45 @@ public class NewsFragment extends BaseFragment implements View.OnClickListener {
                 setBannerData();
             }
         });
+        newsModule.getPerfectArticle(new NewsModule.NewsResponseListener() {
+            @Override
+            public void success(Document document) {
+                Element carousel = document.select("div#innerlist").first();
+                Element ul = carousel.select("ul").first();
+                Elements li = ul.select("li");
+                for (int i = 0; i < li.size(); i++) {
+                    Node node = li.get(i).childNode(0);
+                    String href = node.attributes().get("href");
+                    String title = node.attributes().get("title");
+                    String span = li.get(i).select("span").first().text();
+                    NewsFragmenBean newsFragmenBean = new NewsFragmenBean(span, href, title);
+                    mNewsFragmenArticleList.add(newsFragmenBean);
+                }
+                setListData();
+            }
+        });
+    }
+
+    /**
+     * 设置ListView的数据
+     */
+    private void setListData() {
+        final PerfectArticleAdapter perfectArticleAdapter = new PerfectArticleAdapter(activity, mNewsFragmenArticleList);
+        listview.setAdapter(perfectArticleAdapter);
+        setListViewHeightBasedOnChildren(listview);
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                for (int i = 0; i < mNewsFragmenArticleList.size(); i++) {
+                    mNewsFragmenArticleList.get(i).setTouch(false);
+                }
+                mNewsFragmenArticleList.get(position).setTouch(true);
+                perfectArticleAdapter.notifyDataSetChanged();
+                Intent intent = new Intent(activity, WebviewActivity.class);
+                intent.putExtra("url", "http://www.sylu.edu.cn" + mNewsFragmenArticleList.get(position).getHref());
+                activity.startActivity(intent);
+            }
+        });
     }
 
     /**
@@ -118,7 +169,7 @@ public class NewsFragment extends BaseFragment implements View.OnClickListener {
     private void setBannerData() {
         ArrayList<BaseNewsBannerPager> baseNewsBannerPagers = new ArrayList<>();
         for (int i = 0; i < mNewsFragmenBeenList.size(); i++) {
-            baseNewsBannerPagers.add(new FirstBanner(activity, mNewsFragmenBeenList.get(i).getUrl(), mNewsFragmenBeenList.get(i).getDesc(),mNewsFragmenBeenList.get(i).getHref()));
+            baseNewsBannerPagers.add(new FirstBanner(activity, mNewsFragmenBeenList.get(i).getUrl(), mNewsFragmenBeenList.get(i).getDesc(), mNewsFragmenBeenList.get(i).getHref()));
         }
         setViewPager(baseNewsBannerPagers);
         baseNewsBannerPagers.get(0).initData();
@@ -205,5 +256,26 @@ public class NewsFragment extends BaseFragment implements View.OnClickListener {
 
     }
 
+    public int setListViewHeightBasedOnChildren(ListView listView) {
+        // 获取ListView对应的Adapter
+        ListAdapter listAdapter = listView.getAdapter();
+        if (listAdapter == null) {
+            // pre-condition
+            return 0;
+        }
+        int totalHeight = 0;
+        for (int i = 0, len = listAdapter.getCount(); i < len; i++) { // listAdapter.getCount()返回数据项的数目
+            View listItem = listAdapter.getView(i, null, listView);
+            listItem.measure(0, 0); // 计算子项View 的宽高
+            totalHeight += listItem.getMeasuredHeight(); // 统计所有子项的总高度
+        }
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height = totalHeight
+                + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+        // listView.getDividerHeight()获取子项间分隔符占用的高度
+        // params.height最后得到整个ListView完整显示需要的高度
+        listView.setLayoutParams(params);
+        return params.height;
+    }
 
 }

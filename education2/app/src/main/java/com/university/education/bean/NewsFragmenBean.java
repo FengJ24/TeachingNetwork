@@ -9,6 +9,15 @@ public class NewsFragmenBean {
     private String url;
     private String href;
     private String desc;
+    private boolean isTouch;
+
+    public boolean isTouch() {
+        return isTouch;
+    }
+
+    public void setTouch(boolean touch) {
+        isTouch = touch;
+    }
 
     public String getUrl() {
         return url;

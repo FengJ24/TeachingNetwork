@@ -56,6 +56,38 @@ public class NewsModule {
                 );
     }
 
+    /**
+     * 获取文章信息
+     *
+     * @param newsResponseListener
+     */
+    public void getPerfectArticle(final NewsResponseListener newsResponseListener) {
+        OkHttpClient okHttpClient = new OkHttpClient();
+        int i = okHttpClient.connectTimeoutMillis();
+        Request request = new Request.Builder().url("http://www.sylu.edu.cn/sylusite/lgwy/index.html").get().build();
+        okHttpClient.
+                newCall(request).
+                enqueue(new Callback() {
+                            @Override
+                            public void onFailure(Call call, IOException e) {
+                            }
+
+                            @Override
+                            public void onResponse(Call call, Response response) throws IOException {
+                                final Document document = Jsoup.parse(response.body().string());
+                                mActivity.runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        if (newsResponseListener != null) {
+                                            newsResponseListener.success(document);
+                                        }
+                                    }
+                                });
+                            }
+                        }
+                );
+    }
+
     public interface NewsResponseListener {
         void success(Document document);
     }
