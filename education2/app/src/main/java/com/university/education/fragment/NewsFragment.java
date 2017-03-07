@@ -17,6 +17,12 @@ import android.widget.TextView;
 
 import com.university.education.R;
 import com.university.education.UI.NewsBanner.FirstBanner;
+import com.university.education.UI.NewsFragment.LigongFengcaiActivity;
+import com.university.education.UI.NewsFragment.LigongWenyuanActivity;
+import com.university.education.UI.NewsFragment.SchoolNewsActivity;
+import com.university.education.UI.NewsFragment.StudentActivityActivity;
+import com.university.education.UI.NewsFragment.TeachStudyActivity;
+import com.university.education.UI.NewsFragment.UniversityCultureActivity;
 import com.university.education.UI.WebviewActivity;
 import com.university.education.adapter.PerfectArticleAdapter;
 import com.university.education.base.BaseFragment;
@@ -122,7 +128,7 @@ public class NewsFragment extends BaseFragment implements View.OnClickListener {
                 setBannerData();
             }
         });
-        newsModule.getPerfectArticle(new NewsModule.NewsResponseListener() {
+        newsModule.getPerfectArticle("http://www.sylu.edu.cn/sylusite/slgyw/", new NewsModule.NewsResponseListener() {
             @Override
             public void success(Document document) {
                 Element carousel = document.select("div#innerlist").first();
@@ -253,7 +259,26 @@ public class NewsFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-
+        switch (v.getId()) {
+            case R.id.school_news:
+                activity.startActivity(new Intent(activity, SchoolNewsActivity.class));
+                break;
+            case R.id.teah_stydy:
+                activity.startActivity(new Intent(activity, TeachStudyActivity.class));
+                break;
+            case R.id.Student_activity:
+                activity.startActivity(new Intent(activity, StudentActivityActivity.class));
+                break;
+            case R.id.university_culture:
+                activity.startActivity(new Intent(activity, UniversityCultureActivity.class));
+                break;
+            case R.id.ligong_fengcai:
+                activity.startActivity(new Intent(activity, LigongFengcaiActivity.class));
+                break;
+            case R.id.dang_zheng:
+                activity.startActivity(new Intent(activity, LigongWenyuanActivity.class));
+                break;
+        }
     }
 
     public int setListViewHeightBasedOnChildren(ListView listView) {

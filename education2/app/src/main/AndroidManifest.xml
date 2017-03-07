@@ -44,6 +44,24 @@
         <activity
             android:name=".UI.WebviewActivity"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".UI.NewsFragment.LigongFengcaiActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".UI.NewsFragment.LigongWenyuanActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".UI.NewsFragment.SchoolNewsActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".UI.NewsFragment.StudentActivityActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".UI.NewsFragment.TeachStudyActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".UI.NewsFragment.UniversityCultureActivity"
+            android:screenOrientation="portrait"/>
 
     </application>
 

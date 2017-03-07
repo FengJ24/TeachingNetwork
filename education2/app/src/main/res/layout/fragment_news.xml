@@ -204,7 +204,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="3dp"
-                            android:text="党政实事"
+                            android:text="理工文苑"
                             android:textColor="@color/newFragmentText"
                             android:textSize="16sp"/>
 
@@ -220,9 +220,9 @@
 
             <com.university.education.view.ListViewForScrollView
                 android:id="@+id/listview"
-                android:divider="@null"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:divider="@null">
 
             </com.university.education.view.ListViewForScrollView>
         </LinearLayout>

@@ -61,10 +61,10 @@ public class NewsModule {
      *
      * @param newsResponseListener
      */
-    public void getPerfectArticle(final NewsResponseListener newsResponseListener) {
+    public void getPerfectArticle(String url,final NewsResponseListener newsResponseListener) {
         OkHttpClient okHttpClient = new OkHttpClient();
         int i = okHttpClient.connectTimeoutMillis();
-        Request request = new Request.Builder().url("http://www.sylu.edu.cn/sylusite/lgwy/index.html").get().build();
+        Request request = new Request.Builder().url(url).get().build();
         okHttpClient.
                 newCall(request).
                 enqueue(new Callback() {
