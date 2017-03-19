@@ -4,10 +4,9 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -15,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.university.education.R;
+import com.university.education.base.BaseActivity;
 import com.university.education.constants.Constants;
 import com.university.education.httpEngine.EducationModule;
 import com.university.education.utils.FileUtils;
@@ -27,11 +27,13 @@ import org.jsoup.select.Elements;
 
 import java.io.File;
 
+import static com.university.education.R.layout.activity_teach_nitification;
+
 /**
  * Created by jian on 2017/2/15.
  */
 
-public class TeachNitificationActivity extends AppCompatActivity implements View.OnClickListener {
+public class TeachNitificationActivity extends BaseActivity implements View.OnClickListener {
     private ImageView base_activity_back;
     private TextView base_name;
     private LinearLayout base_activity_title;
@@ -52,36 +54,36 @@ public class TeachNitificationActivity extends AppCompatActivity implements View
     private TextView open;
     private File mFile;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_teach_nitification);
-        initView();
-        initData();
-    }
 
-    private void initView() {
-        base_activity_back = (ImageView) findViewById(R.id.base_activity_back);
-        base_name = (TextView) findViewById(R.id.base_name);
-        base_activity_title = (LinearLayout) findViewById(R.id.base_activity_title);
-        title = (TextView) findViewById(R.id.title);
-        publish = (TextView) findViewById(R.id.publish);
-        watch_counnt = (TextView) findViewById(R.id.watch_counnt);
-        content = (TextView) findViewById(R.id.content);
-        down = (TextView) findViewById(R.id.down);
-        open = (TextView) findViewById(R.id.open);
+    @Override
+    public void initListener() {
         base_activity_back.setOnClickListener(this);
         down.setOnClickListener(this);
         open.setOnClickListener(this);
-
     }
 
-    private void initData() {
+    @Override
+    public void initData() {
         closeDownAndOpen();
         base_name.setText("教务通知详情");
         Intent intent = getIntent();
         mUrl = intent.getStringExtra(Constants.TEACH_NOTIFICATION_URL);
         getDetailData(mUrl);
+    }
+
+    @Override
+    public Object getContentView() {
+        View inflate = LayoutInflater.from(this).inflate(activity_teach_nitification, null);
+        base_activity_back = (ImageView) inflate.findViewById(R.id.base_activity_back);
+        base_name = (TextView) inflate.findViewById(R.id.base_name);
+        base_activity_title = (LinearLayout) inflate.findViewById(R.id.base_activity_title);
+        title = (TextView) inflate.findViewById(R.id.title);
+        publish = (TextView) inflate.findViewById(R.id.publish);
+        watch_counnt = (TextView) inflate.findViewById(R.id.watch_counnt);
+        content = (TextView) inflate.findViewById(R.id.content);
+        down = (TextView) inflate.findViewById(R.id.down);
+        open = (TextView) inflate.findViewById(R.id.open);
+        return inflate;
     }
 
     /**
@@ -95,6 +97,7 @@ public class TeachNitificationActivity extends AppCompatActivity implements View
 
             @Override
             public void onSuccess(Document document) {
+                showContentView();
                 setSucessData(document);
             }
         }, mUrl);

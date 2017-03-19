@@ -65,7 +65,7 @@
             android:name=".UI.WebviewActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".UI.NewsFragment.LigongFengcaiActivity"
+            android:name=".UI.NewsFragmentCaterogyActivity"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".UI.NewsFragment.LigongWenyuanActivity"

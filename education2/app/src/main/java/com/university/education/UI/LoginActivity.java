@@ -1,10 +1,9 @@
 package com.university.education.UI;
 
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.university.education.R;
+import com.university.education.base.BaseActivity;
 import com.university.education.bean.EventBusBean;
 import com.university.education.constants.Constants;
 import com.university.education.httpEngine.MineModule;
@@ -25,14 +25,14 @@ import org.jsoup.select.Elements;
  * Created by jian on 2016/12/25.
  */
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoginActivity extends BaseActivity implements View.OnClickListener {
     private EditText username;
     private EditText password;
     private Button login;
     private String mUsernameString;
     private String mPasswordString;
     private ImageView base_activity_back;
-    private Handler mHandler = new Handler(){
+    private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             EventBus.getDefault().post(new EventBusBean(Constants.LOGIN_SUCCESS, ""));
@@ -40,20 +40,28 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     };
 
+
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        initView();
+    public void initListener() {
+
     }
 
-    private void initView() {
-        username = (EditText) findViewById(R.id.username);
-        password = (EditText) findViewById(R.id.password);
-        login = (Button) findViewById(R.id.login);
-        base_activity_back = (ImageView) findViewById(R.id.base_activity_back);
+    @Override
+    public void initData() {
+        showContentView();
+    }
+
+    @Override
+    public Object getContentView() {
+        View inflate = LayoutInflater.from(this).inflate(R.layout.activity_login, null);
+        username = (EditText) inflate.findViewById(R.id.username);
+        password = (EditText) inflate.findViewById(R.id.password);
+        login = (Button) inflate.findViewById(R.id.login);
+        base_activity_back = (ImageView) inflate.findViewById(R.id.base_activity_back);
         login.setOnClickListener(this);
         base_activity_back.setOnClickListener(this);
+
+        return inflate;
     }
 
     @Override
@@ -81,6 +89,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         new MineModule(this).login(usernameString, passwordString, new MineModule.MineResponseListener() {
             @Override
             public void success(Document document) {
+
                 Elements title = document.select("title");
                 if ("登录".equals(title.text())) {
                     Toast.makeText(LoginActivity.this, "学号或密码有误", Toast.LENGTH_SHORT).show();

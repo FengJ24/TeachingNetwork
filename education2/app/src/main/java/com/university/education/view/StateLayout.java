@@ -68,7 +68,7 @@ public class StateLayout extends FrameLayout {
     @Override
     /**布局加载完成*/
     protected void onFinishInflate() {
-        mLondingView = (LinearLayout) findViewById(R.id.statelayout_linlearlayout);
+        mLondingView = (LinearLayout) findViewById(R.id.state_linlearlayout);
         mFailView = (TextView) findViewById(R.id.statelayout_tv_fail);
         mEmptyView = (LinearLayout) findViewById(R.id.statelayout_empty);
         start_loading = (ProgressBar) findViewById(R.id.start_loading);

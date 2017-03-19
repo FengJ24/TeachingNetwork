@@ -1,4 +1,4 @@
-package com.university.education.UI.NewsFragment;
+package com.university.education.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

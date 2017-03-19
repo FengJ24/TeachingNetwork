@@ -1,14 +1,15 @@
 package com.university.education.UI;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.university.education.R;
 import com.university.education.adapter.StudentGradeAdapter;
+import com.university.education.base.BaseActivity;
 import com.university.education.bean.StudentGradeBean;
 import com.university.education.constants.Constants;
 import com.university.education.httpEngine.MineModule;
@@ -20,24 +21,36 @@ import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
 
+import static com.university.education.R.layout.activity_query_grade;
+
 /**
  * Created by jian on 2016/12/28.
  */
 
-public class QueryGradeActivity extends AppCompatActivity {
+public class QueryGradeActivity extends BaseActivity {
 
     private String mName;
     private String mXuehao;
     private ListView mStudent_grade_list;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_query_grade);
-        ((TextView) findViewById(R.id.base_name)).setText("个人成绩");
-        mStudent_grade_list = (ListView) findViewById(R.id.student_grade_list);
+    public void initListener() {
+
+    }
+
+    @Override
+    public void initData() {
         //连接网络获取数据
         connectNetData();
+    }
+
+    @Override
+    public Object getContentView() {
+        View inflate = LayoutInflater.from(this).inflate(activity_query_grade, null);
+        ((TextView) inflate.findViewById(R.id.base_name)).setText("个人成绩");
+        mStudent_grade_list = (ListView)inflate. findViewById(R.id.student_grade_list);
+
+        return inflate;
     }
 
     /**
@@ -73,8 +86,10 @@ public class QueryGradeActivity extends AppCompatActivity {
      **/
     public void getAllYearData(String value) {
         new MineModule(this).getAllYearGradde(mXuehao, mName, value, true, new MineModule.MineResponseListener() {
+
             @Override
             public void success(Document document) {
+                showContentView();
                 Elements title = document.select("title");
                 if (!"现代教学管理信息系统".equals(title.text())) {
                     Toast.makeText(QueryGradeActivity.this, "登录过期,请重新登录", Toast.LENGTH_SHORT).show();

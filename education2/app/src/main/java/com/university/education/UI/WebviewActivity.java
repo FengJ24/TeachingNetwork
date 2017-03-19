@@ -118,6 +118,7 @@ public class WebviewActivity extends BaseActivity {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case Constants.HandlerConstent.HTTP_SUCCESS:
+                    showContentView();
                     break;
                 case Constants.HandlerConstent.HTTP_ERROR:
                     break;

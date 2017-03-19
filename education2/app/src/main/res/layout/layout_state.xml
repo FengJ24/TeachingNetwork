@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.university.education.view.StateLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+                                           android:id="@+id/statelayout"
+                                           android:layout_width="match_parent"
+                                           android:layout_height="match_parent"
+                                           android:orientation="vertical">
     <!--正在加载-->
     <LinearLayout
-        android:id="@+id/statelayout_linlearlayout"
+        android:id="@+id/state_linlearlayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -14,7 +15,7 @@
         <ProgressBar
             android:id="@+id/start_loading"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 
     <!--加载失败-->
@@ -24,8 +25,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:clickable="true"
-        android:visibility="gone"
-        android:text="内容加载失败,请检查网络后重新加载" />
+        android:text="内容加载失败,请检查网络后重新加载"
+        android:visibility="gone"/>
 
     <!--加载为空-->
 
@@ -33,16 +34,16 @@
         android:id="@+id/statelayout_empty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         android:layout_gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="暂无内容" />
+            android:text="暂无内容"/>
 
     </LinearLayout>
 
