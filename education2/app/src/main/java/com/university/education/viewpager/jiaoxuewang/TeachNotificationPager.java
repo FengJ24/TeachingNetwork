@@ -47,7 +47,6 @@ public class TeachNotificationPager extends BasePager {
     public void initData() {
         final List<TeachNotificationBean> content = new ArrayList<>();
         final List<TeachNotificationBean> newContent = new ArrayList<>();
-        showLoadingView();
         getFirstData(content, newContent);
         mRefreshLoadMoreListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -98,7 +97,6 @@ public class TeachNotificationPager extends BasePager {
                 }
                 newContent.addAll(content);
                 setDataForListView(newContent);
-                hideLoadingView();
 
             }
         }, 4, index);
@@ -113,22 +111,24 @@ public class TeachNotificationPager extends BasePager {
     private void getFirstData(final List<TeachNotificationBean> content, final List<TeachNotificationBean> newContent) {
 
         new EducationModule(mActivity).getTeachNotifacationData(4, new EducationModule.EducationResponseListener() {
+
             @Override
             public void onSuccess(Document document) {
-                Elements listmain = document.select("p.atitle");
-                content.clear();
-                for (int i = 0; i < listmain.size(); i++) {
-                    Element href = listmain.get(i).select("a[href]").first();
-                    String url = href.attributes().get("href");
-                    String title = href.text();
-                    String date = listmain.get(i).select("i.idate").first().text();
-                    TeachNotificationBean teachNotificationBean = new TeachNotificationBean(title, date, url);
-                    content.add(teachNotificationBean);
+                if (switchShowView(document)) {
+                    Elements listmain = document.select("p.atitle");
+                    content.clear();
+                    for (int i = 0; i < listmain.size(); i++) {
+                        Element href = listmain.get(i).select("a[href]").first();
+                        String url = href.attributes().get("href");
+                        String title = href.text();
+                        String date = listmain.get(i).select("i.idate").first().text();
+                        TeachNotificationBean teachNotificationBean = new TeachNotificationBean(title, date, url);
+                        content.add(teachNotificationBean);
+                    }
+                    newContent.clear();
+                    newContent.addAll(content);
+                    setDataForListView(newContent);
                 }
-                newContent.clear();
-                newContent.addAll(content);
-                setDataForListView(newContent);
-                hideLoadingView();
             }
         });
 

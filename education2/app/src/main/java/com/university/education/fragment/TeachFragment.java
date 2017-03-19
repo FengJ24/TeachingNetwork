@@ -47,6 +47,7 @@ public class TeachFragment extends BaseFragment {
 
     @Override
     public void initDate() {
+        mStateLayout.showContentView();
         base_name.setText("教学网");
         mBasePagers = new ArrayList<>();
         mBasePagers.add(new TeachNotificationPager(activity));
@@ -72,6 +73,7 @@ public class TeachFragment extends BaseFragment {
             public void onPageSelected(int position) {
                 mBasePagers.get(position).destoryMessage();
                 mBasePagers.get(position).initData();
+
             }
 
             @Override

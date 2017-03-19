@@ -10,6 +10,8 @@ import com.university.education.R;
 
 import java.util.ArrayList;
 
+import cn.jpush.android.api.JPushInterface;
+
 public class ZZApplication extends Application{
 	// public final String IMAGE_SAVE_PATH = "/yuebao/images/";
 
@@ -34,8 +36,8 @@ public class ZZApplication extends Application{
 
 		CrashHandler crashHandler = CrashHandler.getInstance();
 		crashHandler.init(getApplicationContext());
-//		JPushInterface.setDebugMode(false); // 设置开启日志,发布时请关闭日志
-//		JPushInterface.init(this); // 初始化 JPush
+		JPushInterface.setDebugMode(false); // 设置开启日志,发布时请关闭日志
+		JPushInterface.init(this); // 初始化 JPush
 //
 		DisplayImageOptions defaultOptions = new DisplayImageOptions
 				.Builder()

@@ -97,7 +97,7 @@
                 android:id="@+id/tab_textview3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="校园风光"
+                android:text="就业招聘"
                 android:textColor="@color/RadioButton_bg"
                 android:textSize="12sp"/>
 

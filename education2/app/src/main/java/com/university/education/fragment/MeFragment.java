@@ -2,6 +2,7 @@ package com.university.education.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -20,6 +21,8 @@ import com.university.education.httpEngine.MineModule;
 import com.university.education.utils.PreferenceUtils;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
@@ -40,8 +43,15 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
     private String mXuehao1;
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        EventBus.getDefault().register(this);
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
     public View initView(Activity activity) {
         mActivity = activity;
+
         View inflate = LayoutInflater.from(activity).inflate(R.layout.fragment_me, null);
         mXuehao = (TextView) inflate.findViewById(R.id.xuehao);
         mName = (TextView) inflate.findViewById(R.id.name);
@@ -57,12 +67,16 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public void initDate() {
         base_name.setText("个人中心");
+        setData();
+        mStateLayout.showContentView();
+
+    }
+
+    private void setData() {
         String name = PreferenceUtils.getString(mActivity, Constants.NAME);
         mXuehao1 = PreferenceUtils.getString(mActivity, Constants.XUEHAO);
         mXuehao.setText("学号: " + mXuehao1);
         mName.setText("姓名: " + name);
-
-
     }
 
     @Override
@@ -116,5 +130,18 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
                 }
             }
         });
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void refreshData(EventBusBean eventBusBean){
+        if (eventBusBean.getType().equals(Constants.LOGIN_SUCCESS)){
+            setData();
+        }
+
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }

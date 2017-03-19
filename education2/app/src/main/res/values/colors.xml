@@ -62,6 +62,7 @@
     <color name="video_bg">#f4f4f4</color>
     <!-- 统一简介颜色 -->
     <color name="tongyi_jianjie">#EEEEEE</color>
+    <color name="fragemnt_employment">#EEEEEE</color>
     <color name="tongyi_jianjie1">#dddddd</color>
     <color name="evalaute_color">#999999</color>
     <!-- 灰色透明 -->

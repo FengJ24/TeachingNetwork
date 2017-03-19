@@ -3,26 +3,25 @@ package com.university.education.base;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.Context;
-import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
-import android.widget.FrameLayout;
 
 import com.university.education.R;
+import com.university.education.view.StateLayout;
+
+import java.util.List;
 
 public abstract class BasePager {
+    private final StateLayout mStateLayout;
     public Activity mActivity;
     public View view;
     private Dialog loadingDialog;
-    private final FrameLayout mFrameLayout;
 
     public BasePager(Activity activity) {
         this.mActivity = activity;
-        view = View.inflate(activity, R.layout.layout_base_pager, null);
-        mFrameLayout = (FrameLayout) view.findViewById(R.id.container);
-        mFrameLayout.addView(setContentView(getDetaiilView(mActivity)));
+        mStateLayout = (StateLayout) View.inflate(activity, R.layout.layout_state, null);
+        mStateLayout.setContentView(getDetaiilView(activity));
+        view = mStateLayout;
     }
 
     //1.共同的头抽取出来
@@ -36,38 +35,6 @@ public abstract class BasePager {
     public abstract void destoryMessage();
 
     //7.根据网络链接情况的不同显示的不同布局
-    public void hideLoadingView() {
-        if (loadingDialog != null) {
-            if (loadingDialog.isShowing()) {
-                loadingDialog.dismiss();
-            }
-        }
-    }
-
-    public Dialog createLoadingDialog(Context context) {
-        LayoutInflater inflater = LayoutInflater.from(context);
-        View v = inflater.inflate(R.layout.loading, null);// 得到加载view
-        // 创建自定义样式dialog
-        Dialog loadingDialog = new Dialog(context, R.style.loading_dialog);
-        loadingDialog.setContentView(v);// 设置布局
-        /**
-         * 设置Dialog的宽度为屏幕宽度的61.8%，高度为自适应
-         */
-        WindowManager.LayoutParams lp = loadingDialog.getWindow().getAttributes();
-        lp.width = lp.WRAP_CONTENT;
-        lp.height = lp.WRAP_CONTENT;
-        loadingDialog.getWindow().setAttributes(lp);
-        return loadingDialog;
-
-    }
-
-    @NonNull
-    public void showLoadingView() {
-        if (loadingDialog == null) {
-            loadingDialog = createLoadingDialog(mActivity);
-        }
-        loadingDialog.show();
-    }
 
     /**
      * 添加内容布局
@@ -81,11 +48,34 @@ public abstract class BasePager {
             return (View) layoutIdOrView;
         } else {
             int layoutId = (Integer) layoutIdOrView;
-            View inflate = LayoutInflater.from(mActivity).inflate(layoutId, mFrameLayout, false);
+            View inflate = LayoutInflater.from(mActivity).inflate(layoutId, null);
             return inflate;
         }
 
     }
+    public boolean switchShowView(Object list) {
+        boolean isShow = false;
+        if (list instanceof List<?>) {
+            List<?> list1 = (List<?>) list;
+//			if (list1 == null) {
+//				stateLayout.showFailView();
+//			} else if (list1.isEmpty()) {
+            mStateLayout.showContentView();
+//			} else {
+//				TLog.log("showContentView");
+//				stateLayout.showContentView();
+            isShow = true;
+//			}
+        } else {
+            if (list == null) {
+                mStateLayout.showFailView();
+            } else {
+                mStateLayout.showContentView();
+                isShow = true;
+            }
+        }
 
+        return isShow;
+    }
 }
 

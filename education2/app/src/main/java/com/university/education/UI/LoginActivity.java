@@ -1,6 +1,8 @@
 package com.university.education.UI;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
@@ -30,6 +32,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private String mUsernameString;
     private String mPasswordString;
     private ImageView base_activity_back;
+    private Handler mHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            EventBus.getDefault().post(new EventBusBean(Constants.LOGIN_SUCCESS, ""));
+            super.handleMessage(msg);
+        }
+    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -87,7 +96,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     //将学号和姓名进行存储
                     PreferenceUtils.putString(LoginActivity.this, Constants.NAME, split[1]);
                     PreferenceUtils.putString(LoginActivity.this, Constants.XUEHAO, split[0]);
-                    EventBus.getDefault().post(new EventBusBean(Constants.LOGIN_SUCCESS, ""));
+                    mHandler.sendEmptyMessage(0);
                     finish();
                 }
             }

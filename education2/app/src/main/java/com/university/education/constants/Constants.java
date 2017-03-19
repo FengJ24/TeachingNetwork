@@ -51,7 +51,7 @@ public interface Constants {
     String LOGIN_BACK = "login_back";
 
     //日志文件存储路径
-    public static final String LOG_SAVE_PATH = "/education/log";
+    public static final String LOG_SAVE_PATH = "/university/log";
 
     //登录成功
     String LOGIN_SUCCESS = "login_success";

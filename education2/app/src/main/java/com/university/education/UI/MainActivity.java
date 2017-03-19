@@ -123,9 +123,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //每次切换,将上一个隐藏掉
                 mSupportFragmentManager.beginTransaction().hide(lastFragment).commitAllowingStateLoss();
                 if (baseFragment.isAdded()) {
-                    mSupportFragmentManager.beginTransaction().show(baseFragment).commit();
+                    mSupportFragmentManager.beginTransaction().show(baseFragment).commitAllowingStateLoss();
                 } else {
-                    mSupportFragmentManager.beginTransaction().add(R.id.main_framelayout, baseFragment, tag).commit();
+                    mSupportFragmentManager.beginTransaction().add(R.id.main_framelayout, baseFragment, tag).commitAllowingStateLoss();
                 }
                 //将上一个lastFragment重新赋值
                 lastFragment = baseFragment;

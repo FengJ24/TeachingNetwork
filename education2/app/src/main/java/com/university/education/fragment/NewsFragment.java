@@ -95,6 +95,10 @@ public class NewsFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     public void initDate() {
+        base_activity_title.setFocusable(true);
+        base_activity_title.setFocusableInTouchMode(true);
+        base_activity_title.requestFocus();
+
         mNewsFragmenBeenList = new ArrayList<>();
         mNewsFragmenArticleList = new ArrayList<>();
         netWork();
@@ -131,18 +135,20 @@ public class NewsFragment extends BaseFragment implements View.OnClickListener {
         newsModule.getPerfectArticle("http://www.sylu.edu.cn/sylusite/slgyw/", new NewsModule.NewsResponseListener() {
             @Override
             public void success(Document document) {
-                Element carousel = document.select("div#innerlist").first();
-                Element ul = carousel.select("ul").first();
-                Elements li = ul.select("li");
-                for (int i = 0; i < li.size(); i++) {
-                    Node node = li.get(i).childNode(0);
-                    String href = node.attributes().get("href");
-                    String title = node.attributes().get("title");
-                    String span = li.get(i).select("span").first().text();
-                    NewsFragmenBean newsFragmenBean = new NewsFragmenBean(span, href, title);
-                    mNewsFragmenArticleList.add(newsFragmenBean);
+                if (switchShowView(document)) {
+                    Element carousel = document.select("div#innerlist").first();
+                    Element ul = carousel.select("ul").first();
+                    Elements li = ul.select("li");
+                    for (int i = 0; i < li.size(); i++) {
+                        Node node = li.get(i).childNode(0);
+                        String href = node.attributes().get("href");
+                        String title = node.attributes().get("title");
+                        String span = li.get(i).select("span").first().text();
+                        NewsFragmenBean newsFragmenBean = new NewsFragmenBean(span, href, title);
+                        mNewsFragmenArticleList.add(newsFragmenBean);
+                    }
+                    setListData();
                 }
-                setListData();
             }
         });
     }
