@@ -1,7 +1,6 @@
 package com.university.education.UI;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.GridView;
@@ -24,8 +23,6 @@ import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
 
-import static com.university.education.R.layout.activity_class_table;
-
 /**
  * Created by jian on 2016/12/28.
  */
@@ -38,12 +35,6 @@ public class ClassTableActivity extends BaseActivity implements View.OnClickList
     private GridView mClass_table_gridview;
     private ClassTableAdapter mClassTableAdapter;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(activity_class_table);
-
-    }
 
     /*获取课程表数据*/
     private void getClassTable() {
@@ -177,15 +168,15 @@ public class ClassTableActivity extends BaseActivity implements View.OnClickList
     }
 
     @Override
-    public void initData() {
+    public void initData(TextView base_name, ImageView base_activity_pic, ImageView base_activity_back) {
         getClassTable();
-//        getClassTableData();
+        base_name.setText("个人课表");
     }
+
 
     @Override
     public Object getContentView() {
-        View inflate = LayoutInflater.from(this).inflate(activity_class_table, null);
-        ((TextView) inflate.findViewById(R.id.base_name)).setText("个人课表");
+        View inflate = LayoutInflater.from(this).inflate(R.layout.activity_class_table, null);
         mClass_table_gridview = (GridView)inflate.findViewById(R.id.class_table_gridview);
         mClassTableAdapter = new ClassTableAdapter(this);
         mClass_table_gridview.setNumColumns(8);

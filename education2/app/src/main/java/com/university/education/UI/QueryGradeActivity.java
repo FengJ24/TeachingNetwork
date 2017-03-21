@@ -3,6 +3,7 @@ package com.university.education.UI;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,8 +22,6 @@ import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
 
-import static com.university.education.R.layout.activity_query_grade;
-
 /**
  * Created by jian on 2016/12/28.
  */
@@ -39,17 +38,15 @@ public class QueryGradeActivity extends BaseActivity {
     }
 
     @Override
-    public void initData() {
-        //连接网络获取数据
+    public void initData(TextView base_name, ImageView base_activity_pic, ImageView base_activity_back) {
+        base_name.setText("个人成绩");
         connectNetData();
     }
 
     @Override
     public Object getContentView() {
-        View inflate = LayoutInflater.from(this).inflate(activity_query_grade, null);
-        ((TextView) inflate.findViewById(R.id.base_name)).setText("个人成绩");
-        mStudent_grade_list = (ListView)inflate. findViewById(R.id.student_grade_list);
-
+        View inflate = LayoutInflater.from(this).inflate(R.layout.activity_query_grade, null);
+        mStudent_grade_list = (ListView) inflate.findViewById(R.id.student_grade_list);
         return inflate;
     }
 

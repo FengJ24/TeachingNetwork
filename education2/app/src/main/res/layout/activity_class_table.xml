@@ -4,15 +4,13 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <include layout="@layout/layout_base_title"/>
-
     <GridView
         android:id="@+id/class_table_gridview"
-        android:horizontalSpacing="2dp"
-        android:verticalSpacing="2dp"
-        android:background="@color/blue_item"
-        android:padding="2dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:background="@color/blue_item"
+        android:horizontalSpacing="2dp"
+        android:padding="2dp"
+        android:verticalSpacing="2dp"/>
 
 </LinearLayout>

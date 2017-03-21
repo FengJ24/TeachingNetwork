@@ -1,19 +1,16 @@
 package com.university.education.viewpager.jiaoxuewang;
 
 import android.app.Activity;
-import android.content.Intent;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
 
+import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.university.education.R;
-import com.university.education.UI.TeachNitificationActivity;
-import com.university.education.adapter.TeachNificationAdapter;
+import com.university.education.adapter.TeachNificationRecycleAdapter;
 import com.university.education.base.BasePager;
 import com.university.education.bean.TeachNotificationBean;
-import com.university.education.constants.Constants;
 import com.university.education.httpEngine.EducationModule;
-import com.university.education.view.RefreshLoadMoreListView;
 
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -22,13 +19,15 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.university.education.R.id.listview;
+
 /**
  * Created by jian on 2017/2/13.
  */
 
 public class TestMessagePager extends BasePager {
     private Activity mActivity;
-    private RefreshLoadMoreListView mRefreshLoadMoreListView;
+    private XRecyclerView mRefreshLoadMoreListView;
     private int index = 1;
 
     public TestMessagePager(Activity activity) {
@@ -39,7 +38,7 @@ public class TestMessagePager extends BasePager {
     @Override
     protected Object getDetaiilView(Activity activity) {
         View inflate = LayoutInflater.from(activity).inflate(R.layout.pager_teachitifi, null);
-        mRefreshLoadMoreListView = (RefreshLoadMoreListView) inflate.findViewById(R.id.listview);
+        mRefreshLoadMoreListView = (XRecyclerView) inflate.findViewById(listview);
         return inflate;
     }
 
@@ -47,25 +46,19 @@ public class TestMessagePager extends BasePager {
     public void initData() {
         final List<TeachNotificationBean> content = new ArrayList<>();
         final List<TeachNotificationBean> newContent = new ArrayList<>();
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mActivity);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        mRefreshLoadMoreListView.setLayoutManager(linearLayoutManager);
         getFirstData(content, newContent);
-        mRefreshLoadMoreListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(mActivity, TeachNitificationActivity.class);
-                intent.putExtra(Constants.TEACH_NOTIFICATION_URL, content.get(position - 1).getUrl());
-                mActivity.startActivity(intent);
-            }
-        });
-        mRefreshLoadMoreListView.setOnRefreshListner(new RefreshLoadMoreListView.OnRefreshListner() {
+        mRefreshLoadMoreListView.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
                 index = 1;
                 getFirstData(content, newContent);
             }
-        });
-        mRefreshLoadMoreListView.setOnLoadingMoreListener(new RefreshLoadMoreListView.OnLoadingMoreListener() {
+
             @Override
-            public void loadingMore() {
+            public void onLoadMore() {
                 index++;
                 getPetPagerData(content, newContent);
             }
@@ -139,10 +132,10 @@ public class TestMessagePager extends BasePager {
      * @param content
      */
     private void setDataForListView(List<TeachNotificationBean> content) {
-        TeachNificationAdapter teachNificationAdapter = new TeachNificationAdapter(content);
-        mRefreshLoadMoreListView.setAdapter(teachNificationAdapter);
-        mRefreshLoadMoreListView.onRefreshComplete();
-        mRefreshLoadMoreListView.hideFootView();
+        TeachNificationRecycleAdapter teachNificationRecycleAdapter = new TeachNificationRecycleAdapter(content, mActivity);
+        mRefreshLoadMoreListView.setAdapter(teachNificationRecycleAdapter);
+        mRefreshLoadMoreListView.refreshComplete();
+        mRefreshLoadMoreListView.loadMoreComplete();
 
     }
 

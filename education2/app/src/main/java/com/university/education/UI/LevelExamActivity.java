@@ -3,6 +3,7 @@ package com.university.education.UI;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.university.education.R;
@@ -27,9 +28,10 @@ public class LevelExamActivity extends BaseActivity {
     }
 
     @Override
-    public void initData() {
-        showContentView();
+    public void initData(TextView base_name, ImageView base_activity_pic, ImageView base_activity_back) {
+        base_name.setText("等级考试");
     }
+
 
     @Override
     public Object getContentView() {

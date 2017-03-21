@@ -29,8 +29,6 @@ import java.util.List;
 public class NewsFragmentCaterogyActivity extends BaseActivity {
     private XRecyclerView mXRecyclerView;
     private List<NewsFragmenBean> mNewsFragmenArticleList;
-    private ImageView base_activity_back;
-    private TextView base_name;
 
     @Override
     public void initListener() {
@@ -38,20 +36,13 @@ public class NewsFragmentCaterogyActivity extends BaseActivity {
     }
 
     @Override
-    public void initData() {
+    public void initData(TextView base_name, ImageView base_activity_pic, ImageView base_activity_back) {
         mNewsFragmenArticleList = new ArrayList<>();
         Intent intent = getIntent();
         String url = intent.getStringExtra("url");
         String name = intent.getStringExtra("name");
         base_name.setText(name);
-        base_activity_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
         connectNet(url);
-
     }
 
     private void connectNet(String url) {
@@ -62,6 +53,7 @@ public class NewsFragmentCaterogyActivity extends BaseActivity {
         newsModule.getPerfectArticle("http://www.sylu.edu.cn/sylusite/" + url, new NewsModule.NewsResponseListener() {
             @Override
             public void success(Document document) {
+                showContentView();
                 Element carousel = document.select("div#innerlist").first();
                 Element ul = carousel.select("ul").first();
                 Elements li = ul.select("li");
@@ -98,8 +90,6 @@ public class NewsFragmentCaterogyActivity extends BaseActivity {
     public Object getContentView() {
         View inflate = LayoutInflater.from(this).inflate(R.layout.activity_news_fragment, null);
         mXRecyclerView = (XRecyclerView) inflate.findViewById(R.id.recycleview);
-        base_activity_back = (ImageView) inflate.findViewById(R.id.base_activity_back);
-        base_name = (TextView) inflate.findViewById(R.id.base_name);
         return inflate;
     }
 

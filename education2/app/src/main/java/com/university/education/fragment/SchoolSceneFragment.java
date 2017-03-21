@@ -1,9 +1,11 @@
 package com.university.education.fragment;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -12,6 +14,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.university.education.R;
+import com.university.education.UI.WebviewActivity;
 import com.university.education.adapter.EmploymentFragmentAdapter;
 import com.university.education.base.BaseFragment;
 import com.university.education.bean.EmploymentFragmenBean;
@@ -29,7 +32,7 @@ import java.util.ArrayList;
  * Created by jian on 2016/12/25.
  */
 
-public class SchoolSceneFragment extends BaseFragment implements View.OnClickListener {
+public class SchoolSceneFragment extends BaseFragment implements View.OnClickListener{
     private Activity mActivity;
     private View mInflate;
     private View rootView;
@@ -37,15 +40,15 @@ public class SchoolSceneFragment extends BaseFragment implements View.OnClickLis
     private TextView base_name;
     private ImageView base_activity_pic;
     private LinearLayout base_activity_title;
-    private ListViewForScrollView listview_school_notice;
     private FrameLayout school_notice;
+    private ListViewForScrollView listview_school_notice;
     private ListViewForScrollView listview_particular_employ;
-    private FrameLayout particular_employ;
     private ListViewForScrollView listview_need_message;
-    private FrameLayout need_message;
     private ListViewForScrollView listview_career_guidice;
-    private FrameLayout career_guidice;
     private ListViewForScrollView listview_polices_regulation;
+    private FrameLayout particular_employ;
+    private FrameLayout need_message;
+    private FrameLayout career_guidice;
     private FrameLayout polices_regulation;
     private EmploymentModule mEmploymentModule;
     private ArrayList<EmploymentFragmenBean> mSchoolNoticeList;
@@ -90,7 +93,7 @@ public class SchoolSceneFragment extends BaseFragment implements View.OnClickLis
         mEmploymentModule.getEmployData(new EmploymentModule.EmploymentResponseListener() {
             @Override
             public void success(Document document) {
-                if (switchShowView(document)){
+                if (switchShowView(document)) {
                     setSchoolNotice(document);
                     setParticularEmploy(document);
                     setNeedMessagee(document);
@@ -223,8 +226,47 @@ public class SchoolSceneFragment extends BaseFragment implements View.OnClickLis
         need_message.setOnClickListener(this);
         career_guidice.setOnClickListener(this);
         polices_regulation.setOnClickListener(this);
+        listview_career_guidice.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(activity, WebviewActivity.class);
+                intent.putExtra("url", "http://zsjy.sylu.edu.cn" + mCareerGuidiceList.get(position).getHref());
+                activity.startActivity(intent);
+            }
+        });
+        listview_school_notice.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(activity, WebviewActivity.class);
+                intent.putExtra("url", "http://zsjy.sylu.edu.cn" + mSchoolNoticeList.get(position).getHref());
+                activity.startActivity(intent);
+            }
+        });
+        listview_particular_employ.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(activity, WebviewActivity.class);
+                intent.putExtra("url", "http://zsjy.sylu.edu.cn" + mParticularEmployList.get(position).getHref());
+                activity.startActivity(intent);
+            }
+        });
+        listview_need_message.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(activity, WebviewActivity.class);
+                intent.putExtra("url", "http://zsjy.sylu.edu.cn" + mNeedMessageeList.get(position).getHref());
+                activity.startActivity(intent);
+            }
+        });
+        listview_polices_regulation.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(activity, WebviewActivity.class);
+                intent.putExtra("url", "http://zsjy.sylu.edu.cn" + mPolicesRegulationList.get(position).getHref());
+                activity.startActivity(intent);
+            }
+        });
     }
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -264,6 +306,7 @@ public class SchoolSceneFragment extends BaseFragment implements View.OnClickLis
         listView.setLayoutParams(params);
         return params.height;
     }
+
 
 
 }

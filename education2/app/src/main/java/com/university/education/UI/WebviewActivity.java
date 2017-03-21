@@ -22,13 +22,10 @@ import com.university.education.constants.Constants;
 
 
 public class WebviewActivity extends BaseActivity {
-    private TextView title_textview;
     private WebView webview;
     private String Strtitle = "";
     private String url = "";
     private ProgressDialog dialog;
-    private ImageView base_activity_back;
-    private TextView base_name;
 
 
     @Override
@@ -37,24 +34,8 @@ public class WebviewActivity extends BaseActivity {
     }
 
     @Override
-    public Object getContentView() {
-        View inflate = LayoutInflater.from(this).inflate(R.layout.webview_activity, null);
-        webview = (WebView) inflate.findViewById(R.id.webview);
-        base_activity_back = (ImageView) inflate.findViewById(R.id.base_activity_back);
-        base_name = (TextView) inflate.findViewById(R.id.base_name);
-        base_activity_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+    public void initData(TextView base_name, ImageView base_activity_pic, ImageView base_activity_back) {
         base_name.setText("消息详情");
-        url = getIntent().getStringExtra("url");
-        return inflate;
-    }
-
-    @Override
-    public void initData() {
         webViewSetting();
         webview.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
         webview.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
@@ -86,6 +67,16 @@ public class WebviewActivity extends BaseActivity {
         });
         webview.loadUrl(url);
     }
+
+    @Override
+    public Object getContentView() {
+        View inflate = LayoutInflater.from(this).inflate(R.layout.webview_activity, null);
+        webview = (WebView) inflate.findViewById(R.id.webview);
+
+        url = getIntent().getStringExtra("url");
+        return inflate;
+    }
+
 
     /**
      * 璁剧疆webview

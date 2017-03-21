@@ -9,7 +9,6 @@ import android.support.v4.app.ActivityCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,16 +26,11 @@ import org.jsoup.select.Elements;
 
 import java.io.File;
 
-import static com.university.education.R.layout.activity_teach_nitification;
-
 /**
  * Created by jian on 2017/2/15.
  */
 
 public class TeachNitificationActivity extends BaseActivity implements View.OnClickListener {
-    private ImageView base_activity_back;
-    private TextView base_name;
-    private LinearLayout base_activity_title;
     private TextView title;
     private TextView publish;
     private TextView watch_counnt;
@@ -57,13 +51,12 @@ public class TeachNitificationActivity extends BaseActivity implements View.OnCl
 
     @Override
     public void initListener() {
-        base_activity_back.setOnClickListener(this);
         down.setOnClickListener(this);
         open.setOnClickListener(this);
     }
 
     @Override
-    public void initData() {
+    public void initData(TextView base_name, ImageView base_activity_pic, ImageView base_activity_back) {
         closeDownAndOpen();
         base_name.setText("教务通知详情");
         Intent intent = getIntent();
@@ -71,12 +64,10 @@ public class TeachNitificationActivity extends BaseActivity implements View.OnCl
         getDetailData(mUrl);
     }
 
+
     @Override
     public Object getContentView() {
-        View inflate = LayoutInflater.from(this).inflate(activity_teach_nitification, null);
-        base_activity_back = (ImageView) inflate.findViewById(R.id.base_activity_back);
-        base_name = (TextView) inflate.findViewById(R.id.base_name);
-        base_activity_title = (LinearLayout) inflate.findViewById(R.id.base_activity_title);
+        View inflate = LayoutInflater.from(this).inflate(R.layout.activity_teach_nitification, null);
         title = (TextView) inflate.findViewById(R.id.title);
         publish = (TextView) inflate.findViewById(R.id.publish);
         watch_counnt = (TextView) inflate.findViewById(R.id.watch_counnt);
@@ -245,9 +236,6 @@ public class TeachNitificationActivity extends BaseActivity implements View.OnCl
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.base_activity_back:
-                finish();
-                break;
             case R.id.down:
                 down();
                 break;

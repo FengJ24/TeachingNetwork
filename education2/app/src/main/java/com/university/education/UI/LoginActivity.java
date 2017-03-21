@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.university.education.R;
@@ -31,7 +32,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private Button login;
     private String mUsernameString;
     private String mPasswordString;
-    private ImageView base_activity_back;
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -47,9 +47,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     }
 
     @Override
-    public void initData() {
+    public void initData(TextView base_name, ImageView base_activity_pic, ImageView base_activity_back) {
+        base_name.setText("登录");
         showContentView();
     }
+
 
     @Override
     public Object getContentView() {
@@ -57,9 +59,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         username = (EditText) inflate.findViewById(R.id.username);
         password = (EditText) inflate.findViewById(R.id.password);
         login = (Button) inflate.findViewById(R.id.login);
-        base_activity_back = (ImageView) inflate.findViewById(R.id.base_activity_back);
         login.setOnClickListener(this);
-        base_activity_back.setOnClickListener(this);
 
         return inflate;
     }
@@ -70,9 +70,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             case R.id.login:
                 submit();
                 connectNet(mUsernameString, mPasswordString);
-                break;
-            case R.id.base_activity_back:
-                loginBack();
                 break;
         }
     }

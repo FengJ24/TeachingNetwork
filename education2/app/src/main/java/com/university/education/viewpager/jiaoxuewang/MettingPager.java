@@ -1,19 +1,16 @@
 package com.university.education.viewpager.jiaoxuewang;
 
 import android.app.Activity;
-import android.content.Intent;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
 
+import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.university.education.R;
-import com.university.education.UI.TeachNitificationActivity;
-import com.university.education.adapter.TeachNificationAdapter;
+import com.university.education.adapter.TeachNificationRecycleAdapter;
 import com.university.education.base.BasePager;
 import com.university.education.bean.TeachNotificationBean;
-import com.university.education.constants.Constants;
 import com.university.education.httpEngine.EducationModule;
-import com.university.education.view.RefreshLoadMoreListView;
 
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -22,17 +19,19 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.university.education.R.id.listview;
+
 /**
  * Created by jian on 2017/2/13.
  */
 
 public class MettingPager extends BasePager {
     private Activity mActivity;
-    private RefreshLoadMoreListView mRefreshLoadMoreListView;
+    private XRecyclerView mRefreshLoadMoreListView;
     private int index = 1;
     private boolean isLoadMore = false;
-    private TeachNificationAdapter mTeachNificationAdapter;
     private List<TeachNotificationBean> mNewContent;
+    private TeachNificationRecycleAdapter mTeachNificationRecycleAdapter;
 
     public MettingPager(Activity activity) {
         super(activity);
@@ -42,37 +41,29 @@ public class MettingPager extends BasePager {
     @Override
     protected Object getDetaiilView(Activity activity) {
         View inflate = LayoutInflater.from(activity).inflate(R.layout.pager_teachitifi, null);
-        mRefreshLoadMoreListView = (RefreshLoadMoreListView) inflate.findViewById(R.id.listview);
+        mRefreshLoadMoreListView = (XRecyclerView) inflate.findViewById(listview);
         return inflate;
     }
 
     @Override
     public void initData() {
         final List<TeachNotificationBean> content = new ArrayList<>();
-        mNewContent = new ArrayList<>();
-        getFirstData(content, mNewContent);
-        mRefreshLoadMoreListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(mActivity, TeachNitificationActivity.class);
-                intent.putExtra(Constants.TEACH_NOTIFICATION_URL, content.get(position - 1).getUrl());
-                mActivity.startActivity(intent);
-            }
-        });
-        mRefreshLoadMoreListView.setOnRefreshListner(new RefreshLoadMoreListView.OnRefreshListner() {
+        final List<TeachNotificationBean> newContent = new ArrayList<>();
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mActivity);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        mRefreshLoadMoreListView.setLayoutManager(linearLayoutManager);
+        getFirstData(content, newContent);
+        mRefreshLoadMoreListView.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
-                isLoadMore = false;
                 index = 1;
-                getFirstData(content, mNewContent);
+                getFirstData(content, newContent);
             }
-        });
-        mRefreshLoadMoreListView.setOnLoadingMoreListener(new RefreshLoadMoreListView.OnLoadingMoreListener() {
+
             @Override
-            public void loadingMore() {
-                isLoadMore = true;
+            public void onLoadMore() {
                 index++;
-                getPetPagerData(content, mNewContent);
+                getPetPagerData(content, newContent);
             }
         });
 
@@ -102,7 +93,6 @@ public class MettingPager extends BasePager {
                 }
                 newContent.addAll(content);
                 setDataForListView(newContent);
-                mRefreshLoadMoreListView.hideFootView();
 
 
             }
@@ -135,7 +125,6 @@ public class MettingPager extends BasePager {
                     newContent.clear();
                     newContent.addAll(content);
                     setDataForListView(newContent);
-                    mRefreshLoadMoreListView.onRefreshComplete();
                 }
             }
         });
@@ -150,14 +139,14 @@ public class MettingPager extends BasePager {
     private void setDataForListView(List<TeachNotificationBean> adapterContent) {
         List<TeachNotificationBean> newAdapterContent = adapterContent;
         if (isLoadMore) {
-            if (mTeachNificationAdapter != null) {
-                mTeachNificationAdapter.notifyDataSetChanged();
+            if (mTeachNificationRecycleAdapter != null) {
+                mTeachNificationRecycleAdapter.notifyDataSetChanged();
             }
         } else {
-            mTeachNificationAdapter = new TeachNificationAdapter(newAdapterContent);
-            mRefreshLoadMoreListView.setAdapter(mTeachNificationAdapter);
-            mRefreshLoadMoreListView.onRefreshComplete();
-            mRefreshLoadMoreListView.hideFootView();
+            mTeachNificationRecycleAdapter = new TeachNificationRecycleAdapter(adapterContent, mActivity);
+            mRefreshLoadMoreListView.setAdapter(mTeachNificationRecycleAdapter);
+            mRefreshLoadMoreListView.refreshComplete();
+            mRefreshLoadMoreListView.loadMoreComplete();
         }
 
     }
