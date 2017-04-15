@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +27,8 @@ import org.greenrobot.eventbus.ThreadMode;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
+
+
 /**
  * Created by jian on 2016/12/25.
  */
@@ -35,6 +38,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
     private TextView mXuehao;
     private TextView mName;
     private TextView base_name;
+    private ImageView basic_activity_back;
     private LinearLayout class_table;
     private LinearLayout query_grade;
     private LinearLayout level_exam;
@@ -61,6 +65,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
         level_exam = (LinearLayout) inflate.findViewById(R.id.level_exam);
         teach_plan = (LinearLayout) inflate.findViewById(R.id.teach_plan);
         exit = (LinearLayout) inflate.findViewById(R.id.exit);
+        basic_activity_back = (ImageView) inflate.findViewById(R.id.base_activity_backed);
         return inflate;
     }
 
@@ -86,6 +91,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
         level_exam.setOnClickListener(this);
         teach_plan.setOnClickListener(this);
         exit.setOnClickListener(this);
+        basic_activity_back.setOnClickListener(this);
     }
 
     @Override

@@ -56,12 +56,14 @@ public class MettingPager extends BasePager {
         mRefreshLoadMoreListView.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
+                isLoadMore = false;
                 index = 1;
                 getFirstData(content, newContent);
             }
 
             @Override
             public void onLoadMore() {
+                isLoadMore = true;
                 index++;
                 getPetPagerData(content, newContent);
             }
@@ -141,13 +143,20 @@ public class MettingPager extends BasePager {
         if (isLoadMore) {
             if (mTeachNificationRecycleAdapter != null) {
                 mTeachNificationRecycleAdapter.notifyDataSetChanged();
+            }else{
+                mTeachNificationRecycleAdapter = new TeachNificationRecycleAdapter(adapterContent, mActivity);
+                mRefreshLoadMoreListView.setAdapter(mTeachNificationRecycleAdapter);
             }
         } else {
-            mTeachNificationRecycleAdapter = new TeachNificationRecycleAdapter(adapterContent, mActivity);
-            mRefreshLoadMoreListView.setAdapter(mTeachNificationRecycleAdapter);
-            mRefreshLoadMoreListView.refreshComplete();
-            mRefreshLoadMoreListView.loadMoreComplete();
+            if (mTeachNificationRecycleAdapter != null) {
+                mTeachNificationRecycleAdapter.notifyDataSetChanged();
+            }else{
+                mTeachNificationRecycleAdapter = new TeachNificationRecycleAdapter(adapterContent, mActivity);
+                mRefreshLoadMoreListView.setAdapter(mTeachNificationRecycleAdapter);
+            }
         }
+        mRefreshLoadMoreListView.refreshComplete();
+        mRefreshLoadMoreListView.loadMoreComplete();
 
     }
 

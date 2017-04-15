@@ -71,7 +71,7 @@ public class NewsFragment extends BaseFragment implements View.OnClickListener {
         mActivity = activity;
         View inflate = LayoutInflater.from(activity).inflate(R.layout.fragment_news, null);
         this.rootView = inflate;
-        this.base_activity_back = (ImageView) rootView.findViewById(R.id.base_activity_back);
+        this.base_activity_back = (ImageView) rootView.findViewById(R.id.base_activity_backed);
         this.base_name = (TextView) rootView.findViewById(R.id.base_name);
         this.base_activity_pic = (ImageView) rootView.findViewById(R.id.base_activity_pic);
         this.base_activity_title = (LinearLayout) rootView.findViewById(R.id.base_activity_title);

@@ -67,22 +67,22 @@
         <activity
             android:name=".UI.NewsFragmentCaterogyActivity"
             android:screenOrientation="portrait"/>
+        <!--qq分享-->
         <activity
-            android:name=".UI.NewsFragment.LigongWenyuanActivity"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name=".UI.NewsFragment.SchoolNewsActivity"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name=".UI.NewsFragment.StudentActivityActivity"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name=".UI.NewsFragment.TeachStudyActivity"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name=".UI.NewsFragment.UniversityCultureActivity"
-            android:screenOrientation="portrait"/>
-
+            android:name="com.tencent.tauth.AuthActivity"
+            android:noHistory="true"
+            android:launchMode="singleTask" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="tencent1106103606" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.tencent.connect.common.AssistActivity"
+                  android:theme="@android:style/Theme.Translucent.NoTitleBar"
+                  android:configChanges="orientation|keyboardHidden|screenSize"
+            />
 
         <!-- Required SDK核心功能-->
         <activity

@@ -23,7 +23,7 @@ public class ClassTableAdapter extends BaseAdapter {
     private List<String> subjectItemList = new ArrayList<>();
     final int TYPE_1 = 0;
     final int TYPE_2 = 1;
-    final int TYPE_3 = 3;
+    final int TYPE_3 = 2;
     private Context mContext;
 
     public ClassTableAdapter(Context context) {
@@ -53,14 +53,17 @@ public class ClassTableAdapter extends BaseAdapter {
             viewHolder = new ViewHolder();
             switch (viewTypeCount){
                 case TYPE_1:
+//                    LayoutInflater.from(mContext).inflate(R.layout.layout_week_info,parent,false);
                     convertView = View.inflate(mContext, R.layout.layout_week_info,null);
                     viewHolder.title = (TextView) convertView.findViewById(R.id.week);
                     break;
                 case TYPE_2:
+//                    LayoutInflater.from(mContext).inflate(R.layout.layout_item_info,parent,false);
                     convertView = View.inflate(mContext, R.layout.layout_item_info,null);
                     viewHolder.item = (TextView) convertView.findViewById(R.id.item);
                     break;
                 case TYPE_3:
+//                    LayoutInflater.from(mContext).inflate(R.layout.layout_subject_info,parent,false);
                     convertView = View.inflate(mContext, R.layout.layout_subject_info,null);
                     viewHolder.subject = (TextView) convertView.findViewById(R.id.subject);
                     break;

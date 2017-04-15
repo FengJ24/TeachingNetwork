@@ -18,6 +18,7 @@
         <item name="android:layout_weight">1</item>
         <item name="android:textSize">11sp</item>
     </style>
+
     <style name="MyDialogStyle">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowFrame">@null</item>
@@ -27,6 +28,12 @@
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
         <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+    <style name="MainQuickOptionDailog" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <!--必须加背景 否则显示不全-->
+        <item name="android:windowBackground">@android:color/white</item>
     </style>
     <!-- 自定义loading dialog -->
     <style name="loading_dialog" parent="android:style/Theme.Dialog">

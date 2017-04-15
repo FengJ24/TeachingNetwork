@@ -29,6 +29,8 @@ public class TeachMessagePager extends BasePager {
     private Activity mActivity;
     private XRecyclerView mRefreshLoadMoreListView;
     private int index = 1;
+    private TeachNificationRecycleAdapter mTeachNificationRecycleAdapter;
+    private boolean isLoadMore;
 
     public TeachMessagePager(Activity activity) {
         super(activity);
@@ -53,12 +55,14 @@ public class TeachMessagePager extends BasePager {
         mRefreshLoadMoreListView.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
+                isLoadMore = false;
                 index = 1;
                 getFirstData(content, newContent);
             }
 
             @Override
             public void onLoadMore() {
+                isLoadMore = true;
                 index++;
                 getPetPagerData(content, newContent);
             }
@@ -133,8 +137,22 @@ public class TeachMessagePager extends BasePager {
      * @param content
      */
     private void setDataForListView(List<TeachNotificationBean> content) {
-        TeachNificationRecycleAdapter teachNificationRecycleAdapter = new TeachNificationRecycleAdapter(content, mActivity);
-        mRefreshLoadMoreListView.setAdapter(teachNificationRecycleAdapter);
+        List<TeachNotificationBean> newAdapterContent = content;
+        if (isLoadMore) {
+            if (mTeachNificationRecycleAdapter != null) {
+                mTeachNificationRecycleAdapter.notifyDataSetChanged();
+            }else{
+                mTeachNificationRecycleAdapter = new TeachNificationRecycleAdapter(newAdapterContent, mActivity);
+                mRefreshLoadMoreListView.setAdapter(mTeachNificationRecycleAdapter);
+            }
+        } else {
+            if (mTeachNificationRecycleAdapter != null) {
+                mTeachNificationRecycleAdapter.notifyDataSetChanged();
+            }else{
+                mTeachNificationRecycleAdapter = new TeachNificationRecycleAdapter(newAdapterContent, mActivity);
+                mRefreshLoadMoreListView.setAdapter(mTeachNificationRecycleAdapter);
+            }
+        }
         mRefreshLoadMoreListView.refreshComplete();
         mRefreshLoadMoreListView.loadMoreComplete();
 

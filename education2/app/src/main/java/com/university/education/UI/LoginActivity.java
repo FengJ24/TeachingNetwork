@@ -50,6 +50,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     public void initData(TextView base_name, ImageView base_activity_pic, ImageView base_activity_back) {
         base_name.setText("登录");
         showContentView();
+        base_activity_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
 

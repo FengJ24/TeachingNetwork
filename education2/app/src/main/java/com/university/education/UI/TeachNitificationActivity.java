@@ -4,7 +4,9 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.os.Environment;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,11 +14,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.tencent.connect.share.QQShare;
+import com.tencent.open.utils.ThreadManager;
+import com.tencent.tauth.IUiListener;
+import com.tencent.tauth.Tencent;
+import com.tencent.tauth.UiError;
 import com.university.education.R;
 import com.university.education.base.BaseActivity;
+import com.university.education.bean.ShareBean;
 import com.university.education.constants.Constants;
 import com.university.education.httpEngine.EducationModule;
 import com.university.education.utils.FileUtils;
+import com.university.education.view.ShareDailog;
 
 import org.jsoup.nodes.Attributes;
 import org.jsoup.nodes.Document;
@@ -47,21 +56,32 @@ public class TeachNitificationActivity extends BaseActivity implements View.OnCl
     private String fileName;
     private TextView open;
     private File mFile;
+    private FloatingActionButton share;
+    private String mTitle;
+    private Tencent mTencent;
 
 
     @Override
     public void initListener() {
         down.setOnClickListener(this);
         open.setOnClickListener(this);
+        share.setOnClickListener(this);
     }
 
     @Override
     public void initData(TextView base_name, ImageView base_activity_pic, ImageView base_activity_back) {
         closeDownAndOpen();
         base_name.setText("教务通知详情");
+        mTencent = Tencent.createInstance("1106103606", this.getApplicationContext());
         Intent intent = getIntent();
         mUrl = intent.getStringExtra(Constants.TEACH_NOTIFICATION_URL);
         getDetailData(mUrl);
+        base_activity_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
 
@@ -74,6 +94,7 @@ public class TeachNitificationActivity extends BaseActivity implements View.OnCl
         content = (TextView) inflate.findViewById(R.id.content);
         down = (TextView) inflate.findViewById(R.id.down);
         open = (TextView) inflate.findViewById(R.id.open);
+        share = (FloatingActionButton) inflate.findViewById(R.id.share);
         return inflate;
     }
 
@@ -117,11 +138,11 @@ public class TeachNitificationActivity extends BaseActivity implements View.OnCl
             mContent = mContent.append(p.get(i).text() + "\n");
         }
         Element child = first.child(0);
-        String title = child.text();
+        mTitle = child.text();
         Element rinfo = document.select("div.rinfo").first();
         String publish = rinfo.child(1).text();
         String num = document.select("i.num").first().text();
-        setDetailData(mContent.toString(), title, publish, num);
+        setDetailData(mContent.toString(), mTitle, publish, num);
     }
 
     /**
@@ -242,6 +263,71 @@ public class TeachNitificationActivity extends BaseActivity implements View.OnCl
             case R.id.open:
                 open();
                 break;
+            case R.id.share:
+                share();
+                break;
         }
+    }
+
+    /**
+     * 分享
+     */
+    private void share() {
+        ShareDailog shareDailog = new ShareDailog(this);
+        shareDailog.setData(new ShareBean(mUrl,mTitle));
+        shareDailog.show();
+
+    }
+    private void shareQQ() {
+        final Bundle bundle = new Bundle();
+//        bundle.putInt(QQShare.SHARE_TO_QQ_KEY_TYPE, QQShare.SHARE_TO_QQ_TYPE_DEFAULT);
+//        bundle.putString(QQShare.SHARE_TO_QQ_TITLE, mTitle);
+////        bundle.putString(QQShare.SHARE_TO_QQ_SUMMARY,"分享信息的主体内容")
+//        bundle.putString(QQShare.SHARE_TO_QQ_TARGET_URL, mUrl);
+//        bundle.putString(QQShare.SHARE_TO_QQ_IMAGE_URL, "https://imgsa.baidu.com/baike/w=150/sign=85365409a1cc7cd9fa2d30dc09002104/dc54564e9258d1099a47e656d358ccbf6d814da9.jpg");
+//        bundle.putString(QQShare.SHARE_TO_QQ_APP_NAME, "沈阳理工大学");
+//        bundle.putInt(QQShare.SHARE_TO_QQ_KEY_TYPE, QQShare.SHARE_TO_QQ_TYPE_IMAGE);
+//        bundle.putInt(QQShare.SHARE_TO_QQ_EXT_INT, 0);
+
+        bundle.putInt(QQShare.SHARE_TO_QQ_KEY_TYPE,QQShare.SHARE_TO_QQ_TYPE_DEFAULT);
+        bundle.putString(QQShare.SHARE_TO_QQ_TITLE, "标题");// 标题
+        bundle.putString(QQShare.SHARE_TO_QQ_SUMMARY, "要分享的摘要");// 摘要
+        bundle.putString(QQShare.SHARE_TO_QQ_TARGET_URL,"http://www.qq.com/news/1.html");// 内容地址
+        bundle.putString(QQShare.SHARE_TO_QQ_IMAGE_URL,"http://imgcache.qq.com/qzone/space_item/pre/0/66768.gif");// 网络图片地址　　params.putString(QQShare.SHARE_TO_QQ_APP_NAME, "应用名称");// 应用名称
+        bundle.putString(QQShare.SHARE_TO_QQ_EXT_INT, "其它附加功能");
+
+        ThreadManager.getMainHandler().post(new Runnable() {
+
+            @Override
+            public void run() {
+                mTencent.shareToQQ(TeachNitificationActivity.this, bundle, qqShareListener);
+            }
+        });
+
+
+
+    }
+    IUiListener qqShareListener = new IUiListener() {
+        @Override
+        public void onCancel() {
+            System.out.println();
+        }
+
+        @Override
+        public void onComplete(Object response) {
+            // TODO Auto-generated method stub
+            System.out.println();
+        }
+
+        @Override
+        public void onError(UiError e) {
+            // TODO Auto-generated method stub
+            System.out.println();
+        }
+    };
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+       super.onActivityResult(requestCode, resultCode, data);
+        Tencent.onActivityResultData(requestCode, resultCode, data, qqShareListener);
     }
 }

@@ -36,7 +36,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     private void initView() {
         mContainer = (StateLayout) findViewById(R.id.statelayout);
         mContainer.setContentView(getContentView());
-        base_activity_back = (ImageView) findViewById(R.id.base_activity_back);
+        base_activity_back = (ImageView) findViewById(R.id.base_activity_backed);
         base_activity_back.setOnClickListener(this);
         base_name = (TextView) findViewById(R.id.base_name);
         base_name.setOnClickListener(this);
@@ -83,8 +83,8 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.base_activity_back:
-                finish();
+            case R.id.base_activity_backed:
+                this.finish();
                 break;
         }
     }

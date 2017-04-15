@@ -38,6 +38,12 @@ public class NewsFragmentCaterogyActivity extends BaseActivity {
     @Override
     public void initData(TextView base_name, ImageView base_activity_pic, ImageView base_activity_back) {
         mNewsFragmenArticleList = new ArrayList<>();
+        base_activity_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         Intent intent = getIntent();
         String url = intent.getStringExtra("url");
         String name = intent.getStringExtra("name");

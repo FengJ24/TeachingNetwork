@@ -9,6 +9,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -25,6 +26,9 @@ import okhttp3.Response;
 
 public class MineModule {
     private Activity mActivity;
+    public final static int CONNECT_TIMEOUT = 60;
+    public final static int READ_TIMEOUT = 100;
+    public final static int WRITE_TIMEOUT = 60;
 
     public MineModule(Activity activity) {
         mActivity = activity;
@@ -202,6 +206,150 @@ public class MineModule {
                 );
     }
 
+    /*获取等级考试本学期详情*/
+    public void getLevelExam(String xuehao, String name, final MineResponseListener mineResponseListerner) {
+        OkHttpClient okHttpClient = new OkHttpClient();
+        String url = HttpApi.BASE + Constants.LEVEL_EXAM + "xh=" + xuehao + "&xm=" + name + Constants.LEVEL_EXAM_ID;
+        RequestBody resquestBody = new FormBody.Builder().add("xh", xuehao).add("xm", name).add("gnmkdm", Constants.LEVEL_EXAM_ID).build();
+        Request.Builder builde = new Request.Builder().url(HttpApi.BASE + Constants.LEVEL_EXAM + "xh=" + xuehao + "&xm=" + name + Constants.LEVEL_EXAM_ID)
+                .get();
+        Request request = builde.addHeader("Referer", encodeHeadInfo(HttpApi.BASE + Constants.LEVEL_EXAM + "xh=" + xuehao)).build();
+        okHttpClient.
+                newCall(request).
+                enqueue(new Callback() {
+                            @Override
+                            public void onFailure(Call call, IOException e) {
+                            }
+
+                            @Override
+                            public void onResponse(Call call, Response response) throws IOException {
+                                final Document document = Jsoup.parse(response.body().string());
+                                mActivity.runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        if (mineResponseListerner != null) {
+                                            mineResponseListerner.success(document);
+                                        }
+                                    }
+                                });
+                            }
+                        }
+                );
+    }
+
+    /*获取等级考试不同学期详情*/
+    public void getLevelExamDif(String xuehao, String name, String viewState, String xueqi, final MineResponseListener mineResponseListerner) {
+        OkHttpClient okHttpClient = new OkHttpClient();
+        int i = okHttpClient.connectTimeoutMillis();
+        String url = HttpApi.BASE + Constants.LEVEL_EXAM + "xh=" + xuehao + "&xm=" + name + Constants.LEVEL_EXAM_ID;
+        RequestBody resquestBody = new FormBody.Builder().add("xh", xuehao).add("xm", name).add("gnmkdm", Constants.LEVEL_EXAM_ID).build();
+        RequestBody muiltipartBody = new MultipartBody.Builder().addPart(resquestBody).setType(MultipartBody.FORM)
+                .addFormDataPart("__EVENTTARGET", "xnd")
+                .addFormDataPart("__EVENTARGUMENT", "")
+                .addFormDataPart("__VIEWSTATE", viewState)
+                .addFormDataPart("xq", xueqi)
+                .addFormDataPart("kcxz", "全部")
+                .build();
+        Request.Builder builde = new Request.Builder().url(HttpApi.BASE + Constants.CLASS_TABLE + "xh=" + xuehao + "&xm=" + name + Constants.CLASS_TABLE_ID)
+                .post(muiltipartBody);
+        Request request = builde.addHeader("Referer", encodeHeadInfo(url)).build();
+        okHttpClient.
+                newCall(request).
+                enqueue(new Callback() {
+                            @Override
+                            public void onFailure(Call call, IOException e) {
+                            }
+
+                            @Override
+                            public void onResponse(Call call, Response response) throws IOException {
+                                final Document document = Jsoup.parse(response.body().string());
+                                mActivity.runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        if (mineResponseListerner != null) {
+                                            mineResponseListerner.success(document);
+                                        }
+                                    }
+                                });
+                            }
+                        }
+                );
+    }
+
+    /*获取教学计划本学期详情*/
+    public void getTeachPlan(String xuehao, String name, final MineResponseListener mineResponseListerner) {
+        OkHttpClient okHttpClient = new OkHttpClient();
+        String url = HttpApi.BASE + Constants.TEACH_PLAN + "xh=" + xuehao + "&xm=" + name + Constants.TEACH_PLAN_ID;
+        RequestBody resquestBody = new FormBody.Builder().add("xh", xuehao).add("xm", name).add("gnmkdm", Constants.TEACH_PLAN_ID).build();
+        Request.Builder builde = new Request.Builder().url(HttpApi.BASE + Constants.TEACH_PLAN + "xh=" + xuehao + "&xm=" + name + Constants.TEACH_PLAN_ID)
+                .get();
+        Request request = builde.addHeader("Referer", encodeHeadInfo(HttpApi.BASE + Constants.TEACH_PLAN + "xh=" + xuehao)).build();
+        okHttpClient.
+                newCall(request).
+                enqueue(new Callback() {
+                            @Override
+                            public void onFailure(Call call, IOException e) {
+                            }
+
+                            @Override
+                            public void onResponse(Call call, Response response) throws IOException {
+                                final Document document = Jsoup.parse(response.body().string());
+                                mActivity.runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        if (mineResponseListerner != null) {
+                                            mineResponseListerner.success(document);
+                                        }
+                                    }
+                                });
+                            }
+                        }
+                );
+    }
+
+    /*获取教学计划不同学期详情*/
+    public void getTeachPlanDif(String xuehao, String name, String viewState, String xueqi, final MineResponseListener mineResponseListerner) {
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)//设置读取超时时间
+                .writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS)//设置写的超时时间
+                .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)//设置连接超时时间
+                .build();
+        String url = HttpApi.BASE + Constants.TEACH_PLAN + "xh=" + xuehao + "&xm=" + name + Constants.TEACH_PLAN_ID;
+        RequestBody resquestBody = new FormBody.Builder().add("xh", xuehao).add("xm", name).add("gnmkdm", Constants.TEACH_PLAN_ID).build();
+        RequestBody muiltipartBody = new MultipartBody.Builder().addPart(resquestBody).setType(MultipartBody.FORM)
+                .addFormDataPart("__EVENTTARGET", "xq")
+                .addFormDataPart("__EVENTARGUMENT", "")
+                .addFormDataPart("__VIEWSTATE", viewState)
+                .addFormDataPart("xq", xueqi)
+                .addFormDataPart("kcxz", "全部")
+                .build();
+        Request.Builder builde = new Request.Builder().url(HttpApi.BASE + Constants.TEACH_PLAN + "xh=" + xuehao + "&xm=" + name + Constants.TEACH_PLAN_ID)
+                .post(muiltipartBody);
+        Request request = builde.addHeader("Referer", encodeHeadInfo(url)).build();
+        okHttpClient.
+                newCall(request).
+                enqueue(new Callback() {
+                            @Override
+                            public void onFailure(Call call, IOException e) {
+                                System.out.println();
+                            }
+
+                            @Override
+                            public void onResponse(Call call, Response response) throws IOException {
+                                final Document document = Jsoup.parse(response.body().string());
+                                mActivity.runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        if (mineResponseListerner != null) {
+                                            mineResponseListerner.success(document);
+                                        }
+                                    }
+                                });
+                            }
+                        }
+                );
+    }
+
     /*退出登录*/
     public void exit_Login(String xuehao, final MineResponseListener mineResponseListerner) {
         OkHttpClient okHttpClient = new OkHttpClient();
@@ -215,6 +363,7 @@ public class MineModule {
                 enqueue(new Callback() {
                             @Override
                             public void onFailure(Call call, IOException e) {
+                                System.out.println();
                             }
 
                             @Override

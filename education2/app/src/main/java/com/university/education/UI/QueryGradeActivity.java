@@ -40,6 +40,12 @@ public class QueryGradeActivity extends BaseActivity {
     @Override
     public void initData(TextView base_name, ImageView base_activity_pic, ImageView base_activity_back) {
         base_name.setText("个人成绩");
+        base_activity_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         connectNetData();
     }
 

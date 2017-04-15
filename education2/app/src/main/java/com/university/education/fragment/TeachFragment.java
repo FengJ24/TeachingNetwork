@@ -38,7 +38,7 @@ public class TeachFragment extends BaseFragment {
         mActivity = activity;
         View inflate = LayoutInflater.from(activity).inflate(R.layout.fragment_teach, null);
         base_name = (TextView) inflate.findViewById(R.id.base_name);
-        base_activity_back = (ImageView) inflate.findViewById(R.id.base_activity_back);
+        base_activity_back = (ImageView) inflate.findViewById(R.id.base_activity_backed);
         fragment_teach_tablayout = (TabLayout) inflate.findViewById(R.id.fragment_teach_tablayout);
         viewpager = (ViewPager) inflate.findViewById(R.id.viewpager);
         base_activity_back.setVisibility(View.INVISIBLE);

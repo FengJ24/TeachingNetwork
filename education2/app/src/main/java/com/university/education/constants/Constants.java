@@ -46,6 +46,8 @@ public interface Constants {
 
     //点击个人成绩所返的ViewState
     String STUDENG_GRADE_VIEWSTATE = "studeng_grade_viewstate";
+    //点击等级考试返回的ViewState
+    String TEACH_PLAN_VIEWSTATE = "teach_plan_viewstate";
 
     //登录界面返回,Event发出的类型
     String LOGIN_BACK = "login_back";
@@ -66,7 +68,12 @@ public interface Constants {
 
     //文件存储路径
     public static final String FILE_SAVE_PATH = "/university/files/";
-    /** handler常用的msg.what */
+    public final static int CLASS_TABLE_DIF = 1993;
+
+
+    /**
+     * handler常用的msg.what
+     */
     public class HandlerConstent {
         public final static int HTTP_SUCCESS = 1;
         public final static int HTTP_ERROR = 2;
@@ -79,35 +86,61 @@ public interface Constants {
         public final static int DELETE = 8;
         public final static int HEADIMAGE_UPLOAD_SUCCESS = 9;
         public final static int HEADIMAGE_UPLOAD_FAILD = 10;
-        /** viewpager自动翻页 */
+        /**
+         * viewpager自动翻页
+         */
         public final static int MSG_CHANGE_PHOTO = 11;
         public final static int CHOOSE_DATE_FINISH = 12;
-        /** 退出登录 */
+        /**
+         * 退出登录
+         */
         public final static int EXIT_LOGIN = 13;
-        /** 退出到登录 */
+        /**
+         * 退出到登录
+         */
         public final static int EXIT_TO_LOGIN = 14;
-        /** 双按钮弹出框第一个按钮点击事件 */
+        /**
+         * 双按钮弹出框第一个按钮点击事件
+         */
         public static final int FIRST_BUTTON_CLICK = 15;
         public static final int APP_UPDATE = 16;
         public static final int MUST_UPDATE = 17;
 
-        /** 不需要更新 */
+        /**
+         * 不需要更新
+         */
         public static final int NOT_APP_UPDATE = 18;
-        /** 更新包下载完成 */
+        /**
+         * 更新包下载完成
+         */
         public static final int DOWNLOAD_NEW_VERSION_FINISH = 19;
-        /** 执行更新 */
+        /**
+         * 执行更新
+         */
         public static final int START_UPDATE = 20;
-        /** 下载成功 */
+        /**
+         * 下载成功
+         */
         public static final int DOWNLOAD_SUCCESS = 21;
-        /** 下载失败 */
+        /**
+         * 下载失败
+         */
         public static final int DOWNLOAD_FAIL = 22;
-        /** 取消下载 */
+        /**
+         * 取消下载
+         */
         public static final int CANCEL_DOWNLOAD = 23;
-        /** 下载中 */
+        /**
+         * 下载中
+         */
         public static final int DOWNLOADING = 24;
-        /** 安装APK */
+        /**
+         * 安装APK
+         */
         public static final int INSTALL_APK = 25;
-        /** 取消强制更新 */
+        /**
+         * 取消强制更新
+         */
         public static final int CANCEL_MUST_UPDATE = 26;
     }
 }
