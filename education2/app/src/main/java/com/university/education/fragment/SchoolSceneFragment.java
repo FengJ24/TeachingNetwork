@@ -231,6 +231,8 @@ public class SchoolSceneFragment extends BaseFragment implements View.OnClickLis
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(activity, WebviewActivity.class);
                 intent.putExtra("url", "http://zsjy.sylu.edu.cn" + mCareerGuidiceList.get(position).getHref());
+                intent.putExtra("name", mCareerGuidiceList.get(position).getDesc());
+
                 activity.startActivity(intent);
             }
         });
@@ -239,6 +241,7 @@ public class SchoolSceneFragment extends BaseFragment implements View.OnClickLis
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(activity, WebviewActivity.class);
                 intent.putExtra("url", "http://zsjy.sylu.edu.cn" + mSchoolNoticeList.get(position).getHref());
+                intent.putExtra("name", mCareerGuidiceList.get(position).getDesc());
                 activity.startActivity(intent);
             }
         });
@@ -246,6 +249,7 @@ public class SchoolSceneFragment extends BaseFragment implements View.OnClickLis
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(activity, WebviewActivity.class);
+                intent.putExtra("name", mCareerGuidiceList.get(position).getDesc());
                 intent.putExtra("url", "http://zsjy.sylu.edu.cn" + mParticularEmployList.get(position).getHref());
                 activity.startActivity(intent);
             }
@@ -254,6 +258,7 @@ public class SchoolSceneFragment extends BaseFragment implements View.OnClickLis
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(activity, WebviewActivity.class);
+                intent.putExtra("name", mCareerGuidiceList.get(position).getDesc());
                 intent.putExtra("url", "http://zsjy.sylu.edu.cn" + mNeedMessageeList.get(position).getHref());
                 activity.startActivity(intent);
             }
@@ -262,6 +267,7 @@ public class SchoolSceneFragment extends BaseFragment implements View.OnClickLis
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(activity, WebviewActivity.class);
+                intent.putExtra("name", mCareerGuidiceList.get(position).getDesc());
                 intent.putExtra("url", "http://zsjy.sylu.edu.cn" + mPolicesRegulationList.get(position).getHref());
                 activity.startActivity(intent);
             }

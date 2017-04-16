@@ -77,6 +77,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
      */
     public void showContentView() {
         mContainer.showContentView();
+
     }
 
 

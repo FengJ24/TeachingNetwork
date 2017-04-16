@@ -99,8 +99,8 @@
         android:layout_margin="40dp"
         android:src="@drawable/new_live_settings"
         android:layout_gravity="bottom|right"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_width="48dp"
+        android:layout_height="48dp"/>
 </FrameLayout>
 
 

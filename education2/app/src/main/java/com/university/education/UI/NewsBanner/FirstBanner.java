@@ -40,6 +40,7 @@ public class FirstBanner extends BaseNewsBannerPager {
             public void onClick(View v) {
                 Intent intent = new Intent(activity, WebviewActivity.class);
                 intent.putExtra("url", "http://www.sylu.edu.cn" + mHref);
+                intent.putExtra("name", mIconDesc);
                 activity.startActivity(intent);
             }
         });

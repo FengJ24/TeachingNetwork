@@ -69,6 +69,10 @@ public interface Constants {
     //文件存储路径
     public static final String FILE_SAVE_PATH = "/university/files/";
     public final static int CLASS_TABLE_DIF = 1993;
+    //webview分享
+    public static final String WEBVIEW_SHARE = "webview_share";
+    //教学网分享
+    public static final String JIAOXUEWANG_SHARE = "jiaoxuewang_share";
 
 
     /**

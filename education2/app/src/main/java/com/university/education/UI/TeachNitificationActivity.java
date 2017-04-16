@@ -274,7 +274,7 @@ public class TeachNitificationActivity extends BaseActivity implements View.OnCl
      */
     private void share() {
         ShareDailog shareDailog = new ShareDailog(this);
-        shareDailog.setData(new ShareBean(mUrl,mTitle));
+        shareDailog.setData(new ShareBean(mUrl,mTitle,Constants.JIAOXUEWANG_SHARE));
         shareDailog.show();
 
     }

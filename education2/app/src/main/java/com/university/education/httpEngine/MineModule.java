@@ -127,7 +127,7 @@ public class MineModule {
     }
 
     /*获取历年成绩*/
-    public void getAllYearGradde(String xuehao, String name, String viewState, boolean isFirst, final MineResponseListener mineResponseListerner) {
+    public void getAllYearGradde(String xuehao, String name,String xuenian, String xueqi,String type,String viewState, boolean isFirst, final MineResponseListener mineResponseListerner) {
         OkHttpClient okHttpClient = new OkHttpClient();
         int i = okHttpClient.connectTimeoutMillis();
         String url = HttpApi.BASE + Constants.STUDENT_GRADE + "xh=" + xuehao + "&xm=" + name + Constants.STUDENT_GRADE_ID;
@@ -137,10 +137,10 @@ public class MineModule {
                 .addFormDataPart("__EVENTARGUMENT", "")
                 .addFormDataPart("__VIEWSTATE", viewState)
                 .addFormDataPart("hidLanguage", "")
-                .addFormDataPart("ddlXN", "")
-                .addFormDataPart("ddlXQ", "")
+                .addFormDataPart("ddlXN", xuenian)
+                .addFormDataPart("ddlXQ", xueqi)
                 .addFormDataPart("ddl_kcxz", "")
-                .addFormDataPart("btn_zcj", "历年成绩").build();
+                .addFormDataPart("btn_zcj", type).build();
         Request.Builder builde = new Request.Builder().url(HttpApi.BASE + Constants.STUDENT_GRADE + "xh=" + xuehao + "&xm=" + name + Constants.STUDENT_GRADE_ID)
                 .post(muiltipartBody);
         Request request = builde.addHeader("Referer", encodeHeadInfo(url)).build();

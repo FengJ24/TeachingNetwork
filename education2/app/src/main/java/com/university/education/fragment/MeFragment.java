@@ -12,9 +12,9 @@ import android.widget.Toast;
 
 import com.university.education.R;
 import com.university.education.UI.ClassTableActivity;
-import com.university.education.UI.LevelExamActivity;
 import com.university.education.UI.QueryGradeActivity;
 import com.university.education.UI.TeachPlanActivity;
+import com.university.education.UI.WebviewActivity;
 import com.university.education.base.BaseFragment;
 import com.university.education.bean.EventBusBean;
 import com.university.education.constants.Constants;
@@ -45,6 +45,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
     private LinearLayout teach_plan;
     private LinearLayout exit;
     private String mXuehao1;
+    private LinearLayout siliuji;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -64,6 +65,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
         query_grade = (LinearLayout) inflate.findViewById(R.id.query_grade);
         level_exam = (LinearLayout) inflate.findViewById(R.id.level_exam);
         teach_plan = (LinearLayout) inflate.findViewById(R.id.teach_plan);
+        siliuji = (LinearLayout) inflate.findViewById(R.id.siliuji);
         exit = (LinearLayout) inflate.findViewById(R.id.exit);
         basic_activity_back = (ImageView) inflate.findViewById(R.id.base_activity_backed);
         return inflate;
@@ -92,6 +94,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
         teach_plan.setOnClickListener(this);
         exit.setOnClickListener(this);
         basic_activity_back.setOnClickListener(this);
+        siliuji.setOnClickListener(this);
     }
 
     @Override
@@ -106,17 +109,29 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
                 intent.setClass(activity, QueryGradeActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.level_exam:
-                intent.setClass(activity, LevelExamActivity.class);
-                startActivity(intent);
-                break;
             case R.id.teach_plan:
                 intent.setClass(activity, TeachPlanActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.level_exam:
+                //学信网
+                intent.setClass(activity, WebviewActivity.class);
+                intent.putExtra("url","https://account.chsi.com.cn/passport/login?service=https%3A%2F%2Fmy.chsi.com.cn%2Farchive%2Fj_spring_cas_security_check");
+                intent.putExtra("title","个人学信网");
+                intent.putExtra("name","个人学信网");
                 startActivity(intent);
                 break;
             case R.id.exit:
                 Toast.makeText(mActivity, "退出登录", Toast.LENGTH_SHORT).show();
                 exitLogin();
+                break;
+            case R.id.siliuji:
+                //四六级
+                intent.setClass(activity, WebviewActivity.class);
+                intent.putExtra("url","http://cet.superdaxue.com/");
+                intent.putExtra("title","四六级查询");
+                intent.putExtra("name","四六级查询");
+                startActivity(intent);
                 break;
         }
 

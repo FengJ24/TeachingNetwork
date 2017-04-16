@@ -19,6 +19,7 @@ import com.tencent.tauth.Tencent;
 import com.tencent.tauth.UiError;
 import com.university.education.R;
 import com.university.education.bean.ShareBean;
+import com.university.education.constants.Constants;
 
 /**
  * Created by jian on 2017/3/25.
@@ -88,9 +89,16 @@ public class ShareDailog extends Dialog implements View.OnClickListener {
     private void shareQQ() {
         final Bundle bundle = new Bundle();
         bundle.putInt(QQShare.SHARE_TO_QQ_KEY_TYPE,QQShare.SHARE_TO_QQ_TYPE_DEFAULT);
-        bundle.putString(QQShare.SHARE_TO_QQ_TITLE, "教务通知");// 标题
+
         bundle.putString(QQShare.SHARE_TO_QQ_SUMMARY, mShareBean.getTitle());// 摘要
-        bundle.putString(QQShare.SHARE_TO_QQ_TARGET_URL,"http://218.25.35.28"+mShareBean.getShareUrl());// 内容地址
+        if (mShareBean.getSource().equals(Constants.WEBVIEW_SHARE)){
+            bundle.putString(QQShare.SHARE_TO_QQ_TITLE, "理工要闻");// 标题
+            bundle.putString(QQShare.SHARE_TO_QQ_TARGET_URL,mShareBean.getShareUrl());// 内容地址
+
+        }else if (mShareBean.getSource().equals(Constants.JIAOXUEWANG_SHARE)){
+            bundle.putString(QQShare.SHARE_TO_QQ_TARGET_URL,"http://218.25.35.28"+mShareBean.getShareUrl());// 内容地址
+            bundle.putString(QQShare.SHARE_TO_QQ_TITLE, "教务通知");// 标题
+        }
         bundle.putString(QQShare.SHARE_TO_QQ_IMAGE_URL,"https://imgsa.baidu.com/baike/w=150/sign=85365409a1cc7cd9fa2d30dc09002104/dc54564e9258d1099a47e656d358ccbf6d814da9.jpg");// 网络图片地址　　params.putString(QQShare.SHARE_TO_QQ_APP_NAME, "应用名称");// 应用名称
         bundle.putString(QQShare.SHARE_TO_QQ_EXT_INT, "其它附加功能");
         ThreadManager.getMainHandler().post(new Runnable() {

@@ -4,9 +4,66 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <ListView
-        android:id="@+id/student_grade_list"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></ListView>
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/choose_sems"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_choose_xueqi"
+            android:padding="6dp"
+            android:text="选择时间"
+            android:textColor="@color/white"
+            android:textSize="14sp"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="4dp"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/current_xueqi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="课程数量"
+            android:textColor="@color/black"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/lesson_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="课程数量"
+            android:textColor="@color/black"
+            android:textSize="14sp"/>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/grade_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/student_grade_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </android.support.v7.widget.RecyclerView>
+
+        <ProgressBar
+            android:id="@+id/progressbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@color/white"/>
+
+    </FrameLayout>
+
 
 </LinearLayout>

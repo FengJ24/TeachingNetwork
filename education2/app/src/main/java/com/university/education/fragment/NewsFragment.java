@@ -165,6 +165,7 @@ public class NewsFragment extends BaseFragment implements View.OnClickListener {
                 perfectArticleAdapter.notifyDataSetChanged();
                 Intent intent = new Intent(activity, WebviewActivity.class);
                 intent.putExtra("url", "http://www.sylu.edu.cn" + mNewsFragmenArticleList.get(position).getHref());
+                intent.putExtra("name",mNewsFragmenArticleList.get(position).getDesc());
                 activity.startActivity(intent);
             }
         });

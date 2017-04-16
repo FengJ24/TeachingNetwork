@@ -6,10 +6,21 @@ package com.university.education.bean;
 public class ShareBean {
     private String shareUrl;
     private String title;
+    private String source;
 
-    public ShareBean(String shareUrl, String title) {
+
+    public ShareBean(String shareUrl, String title, String source) {
         this.shareUrl = shareUrl;
         this.title = title;
+        this.source = source;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
     }
 
     public String getShareUrl() {
