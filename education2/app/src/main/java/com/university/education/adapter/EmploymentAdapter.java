@@ -18,18 +18,19 @@ import java.util.List;
 /**
  * Created by jian on 2017/3/7.
  */
-public class NewFragmentActivityAdapter extends RecyclerView.Adapter<NewFragmentActivityAdapter.MyViewHolder> {
+public class EmploymentAdapter extends RecyclerView.Adapter<EmploymentAdapter.MyViewHolder> {
     private List<NewsFragmenBean> mList;
     private Context mContext;
+    private String mName;
 
-    public NewFragmentActivityAdapter(List<NewsFragmenBean> list, Context context) {
-        mList = list;
+    public EmploymentAdapter( Context context,String name) {
         mContext = context;
+        mName = name;
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View inflate = LayoutInflater.from(mContext).inflate(R.layout.item_newfragment_activity, null);
+        View inflate = LayoutInflater.from(mContext).inflate(R.layout.item_employment, parent,false);
         MyViewHolder myViewHolder = new MyViewHolder(inflate);
         return myViewHolder;
     }
@@ -43,8 +44,9 @@ public class NewFragmentActivityAdapter extends RecyclerView.Adapter<NewFragment
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, WebviewActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("url", "http://www.sylu.edu.cn" + mList.get(position).getHref());
+                intent.putExtra("url", "http://zsjy.sylu.edu.cn" + mList.get(position).getHref());
                 intent.putExtra("name", mList.get(position).getDesc());
+                intent.putExtra("type", mName);
                 mContext.startActivity(intent);
             }
         });
@@ -54,6 +56,10 @@ public class NewFragmentActivityAdapter extends RecyclerView.Adapter<NewFragment
     @Override
     public int getItemCount() {
         return mList.size();
+    }
+
+    public void setData(List<NewsFragmenBean> totalArrayList) {
+        mList = totalArrayList;
     }
 
 

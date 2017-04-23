@@ -212,10 +212,12 @@ public class QueryGradeActivity extends BaseActivity {
                     finish();
                     return;
                 }
-                mGradeBeanArrayList.clear();
-                Elements body = document.select("table.datelist");
                 Element select = document.select("[name=__VIEWSTATE]").first();
                 mValue = select.attr("value");
+                mGradeBeanArrayList.clear();
+                Elements body = document.select("table.datelist");
+                Element selecwt = document.select("[name=__VIEWSTATE]").first();
+                mValue = selecwt.attr("value");
                 //获取所有信息
                 Elements tr = body.select("tr");
                 for (int i = 1; i < tr.size(); i++) {

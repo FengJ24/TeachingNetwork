@@ -18,6 +18,8 @@ import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.university.education.R;
 import com.university.education.base.BaseActivity;
 import com.university.education.bean.ShareBean;
@@ -31,8 +33,11 @@ public class WebviewActivity extends BaseActivity {
     private String url = "";
     private ProgressDialog dialog;
     private String title;
+    private static final int THUMB_SIZE = 150;
     private FloatingActionButton web_share;
     private String name;
+    private IWXAPI api;
+    private String mType;
 
 
     @Override
@@ -42,13 +47,13 @@ public class WebviewActivity extends BaseActivity {
 
     @Override
     public void initData(TextView base_name, ImageView base_activity_pic, ImageView base_activity_back) {
-        if (title!= null){
-            if (!TextUtils.isEmpty(title)){
+        if (title != null) {
+            if (!TextUtils.isEmpty(title)) {
                 base_name.setText(title);
-            }else{
+            } else {
                 base_name.setText("消息详情");
             }
-        }else{
+        } else {
             base_name.setText("消息详情");
         }
         webViewSetting();
@@ -91,22 +96,27 @@ public class WebviewActivity extends BaseActivity {
         url = getIntent().getStringExtra("url");
         title = getIntent().getStringExtra("title");
         name = getIntent().getStringExtra("name");
+        mType = getIntent().getStringExtra("type");
 
+        api = WXAPIFactory.createWXAPI(this, Constants.APP_ID);
+        api.registerApp(Constants.APP_ID);
         web_share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 /**
                  * 分享
                  */
-                    ShareDailog shareDailog = new ShareDailog(WebviewActivity.this);
-                    shareDailog.setData(new ShareBean(url,name,Constants.WEBVIEW_SHARE));
-                    shareDailog.show();
+                ShareDailog shareDailog = new ShareDailog(WebviewActivity.this);
+                ShareBean shareBean = new ShareBean(url, name, Constants.WEBVIEW_SHARE);
+                shareBean.setType(mType);
+                shareDailog.setData(shareBean);
+                shareDailog.show();
+
 
             }
         });
         return inflate;
     }
-
 
     /**
      * 璁剧疆webview
@@ -125,6 +135,7 @@ public class WebviewActivity extends BaseActivity {
         ws.setGeolocationEnabled(true);
         ws.setDomStorageEnabled(true);
         ws.setDatabaseEnabled(true);
+        ws.setSupportZoom(true);
         // 閸氼垳鏁avascript
         ws.setJavaScriptEnabled(true);
 
@@ -149,5 +160,7 @@ public class WebviewActivity extends BaseActivity {
         }
     };
 
-
+    private String buildTransaction(final String type) {
+        return (type == null) ? String.valueOf(System.currentTimeMillis()) : type + System.currentTimeMillis();
+    }
 }

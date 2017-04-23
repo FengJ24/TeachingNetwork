@@ -7,7 +7,15 @@ public class ShareBean {
     private String shareUrl;
     private String title;
     private String source;
+    private String type;
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public ShareBean(String shareUrl, String title, String source) {
         this.shareUrl = shareUrl;

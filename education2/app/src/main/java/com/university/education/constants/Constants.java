@@ -73,6 +73,8 @@ public interface Constants {
     public static final String WEBVIEW_SHARE = "webview_share";
     //教学网分享
     public static final String JIAOXUEWANG_SHARE = "jiaoxuewang_share";
+    //微信APPID
+    public static final String APP_ID = "wx8c8ead5562b44d3f";
 
 
     /**

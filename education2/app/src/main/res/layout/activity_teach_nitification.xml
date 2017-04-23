@@ -4,105 +4,105 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-<FrameLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <ScrollView
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/title"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:gravity="left"
-                android:text="领书通知"
-                android:textSize="18sp"/>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="15dp"
-                android:paddingTop="15dp">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/down"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/title"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:background="@drawable/shape_tv_bg"
-                    android:padding="5dp"
-                    android:text="下载"
-                    android:textSize="14sp"/>
+                    android:layout_marginTop="10dp"
+                    android:gravity="left"
+                    android:text="领书通知"
+                    android:textSize="18sp"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp">
+
+                    <TextView
+                        android:id="@+id/down"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/shape_tv_bg"
+                        android:padding="5dp"
+                        android:text="下载"
+                        android:textSize="14sp"/>
+
+                    <TextView
+                        android:id="@+id/open"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@id/down"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@id/down"
+                        android:background="@drawable/shape_tv_bg"
+                        android:padding="5dp"
+                        android:text="打开"
+                        android:textSize="14sp"/>
+
+                    <TextView
+                        android:id="@+id/watch_counnt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@id/down"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="10dp"
+                        android:gravity="end"
+                        android:text="浏览量:1999"
+                        android:textSize="14sp"/>
+
+                    <TextView
+                        android:id="@+id/publish"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@id/down"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginRight="20dp"
+                        android:layout_toLeftOf="@id/watch_counnt"
+                        android:text="信息学院"
+                        android:textSize="14sp"/>
+
+
+                </RelativeLayout>
 
                 <TextView
-                    android:id="@+id/open"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@id/down"
-                    android:layout_marginLeft="10dp"
-                    android:layout_toRightOf="@id/down"
-                    android:background="@drawable/shape_tv_bg"
-                    android:padding="5dp"
-                    android:text="打开"
-                    android:textSize="14sp"/>
-
-                <TextView
-                    android:id="@+id/watch_counnt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@id/down"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="10dp"
-                    android:gravity="end"
-                    android:text="浏览量:1999"
-                    android:textSize="14sp"/>
-
-                <TextView
-                    android:id="@+id/publish"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@id/down"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginRight="20dp"
-                    android:layout_toLeftOf="@id/watch_counnt"
-                    android:text="信息学院"
-                    android:textSize="14sp"/>
+                    android:gravity="left"
+                    android:lineSpacingExtra="2dp"
+                    android:padding="10dp"
+                    android:text="领书通知"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"/>
 
 
-            </RelativeLayout>
+            </LinearLayout>
+        </ScrollView>
 
-            <TextView
-                android:id="@+id/content"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="left"
-                android:lineSpacingExtra="2dp"
-                android:padding="10dp"
-                android:text="领书通知"
-                android:textColor="@color/black"
-                android:textSize="16sp"/>
-
-
-        </LinearLayout>
-    </ScrollView>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/share"
-        android:layout_margin="40dp"
-        android:src="@drawable/new_live_settings"
-        android:layout_gravity="bottom|right"
-        android:layout_width="48dp"
-        android:layout_height="48dp"/>
-</FrameLayout>
-
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/share"
+            android:layout_margin="40dp"
+            android:src="@drawable/share"
+            android:layout_gravity="bottom|right"
+            android:layout_width="48dp"
+            android:layout_height="48dp"/>
+    </FrameLayout>
 
 
 </LinearLayout>

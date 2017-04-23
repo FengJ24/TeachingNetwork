@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.university.education.R;
+import com.university.education.UI.AuthorActivity;
 import com.university.education.UI.ClassTableActivity;
 import com.university.education.UI.QueryGradeActivity;
 import com.university.education.UI.TeachPlanActivity;
@@ -26,7 +27,6 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
-
 
 
 /**
@@ -46,6 +46,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
     private LinearLayout exit;
     private String mXuehao1;
     private LinearLayout siliuji;
+    private LinearLayout project;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -66,6 +67,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
         level_exam = (LinearLayout) inflate.findViewById(R.id.level_exam);
         teach_plan = (LinearLayout) inflate.findViewById(R.id.teach_plan);
         siliuji = (LinearLayout) inflate.findViewById(R.id.siliuji);
+        project = (LinearLayout) inflate.findViewById(R.id.project);
         exit = (LinearLayout) inflate.findViewById(R.id.exit);
         basic_activity_back = (ImageView) inflate.findViewById(R.id.base_activity_backed);
         return inflate;
@@ -74,6 +76,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public void initDate() {
         base_name.setText("个人中心");
+        basic_activity_back.setVisibility(View.GONE);
         setData();
         mStateLayout.showContentView();
 
@@ -93,8 +96,8 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
         level_exam.setOnClickListener(this);
         teach_plan.setOnClickListener(this);
         exit.setOnClickListener(this);
-        basic_activity_back.setOnClickListener(this);
         siliuji.setOnClickListener(this);
+        project.setOnClickListener(this);
     }
 
     @Override
@@ -131,6 +134,11 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
                 intent.putExtra("url","http://cet.superdaxue.com/");
                 intent.putExtra("title","四六级查询");
                 intent.putExtra("name","四六级查询");
+                startActivity(intent);
+                break;
+            case R.id.project:
+               //关于作品
+                intent.setClass(activity, AuthorActivity.class);
                 startActivity(intent);
                 break;
         }

@@ -14,6 +14,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.university.education.R;
+import com.university.education.UI.EmploymentActivity;
 import com.university.education.UI.WebviewActivity;
 import com.university.education.adapter.EmploymentFragmentAdapter;
 import com.university.education.base.BaseFragment;
@@ -275,19 +276,31 @@ public class SchoolSceneFragment extends BaseFragment implements View.OnClickLis
     }
     @Override
     public void onClick(View v) {
+        Intent intent = new Intent(activity, EmploymentActivity.class);
         switch (v.getId()) {
             case R.id.school_notice:
+                //校内公告
+                intent.putExtra("name","校内公告");
                 break;
             case R.id.particular_employ:
+                //专场招聘
+                intent.putExtra("name","专场招聘");
                 break;
             case R.id.need_message:
+                //需求信息
+                intent.putExtra("name","需求信息");
                 break;
             case R.id.career_guidice:
+                //就业指导
+                intent.putExtra("name","就业指导");
                 break;
             case R.id.polices_regulation:
+                //政策法规
+                intent.putExtra("name","政策法规");
                 break;
-        }
 
+        }
+        activity.startActivity(intent);
 
     }
 

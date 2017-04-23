@@ -147,11 +147,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         fragmentList.add(new SchoolSceneFragment());
         fragmentList.add(new MeFragment());
         //默认显示第一个
-        mSupportFragmentManager.beginTransaction().add(R.id.main_framelayout, fragmentList.get(0),
+        mSupportFragmentManager.beginTransaction().add(R.id.main_framelayout, fragmentList.get(1),
                 "MULTIPLEFRAGMENT").commit();
         //默认上一个lastFragment是MultipleFragment
-        lastFragment = fragmentList.get(0);
-        changeTabColor(0);
+        lastFragment = fragmentList.get(1);
+        changeTabColor(1);
 
     }
 

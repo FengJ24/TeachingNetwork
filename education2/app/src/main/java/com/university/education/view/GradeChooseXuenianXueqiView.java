@@ -3,6 +3,7 @@ package com.university.education.view;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.university.education.R;
 import com.university.education.adapter.GradeChooseTermAdapter;
@@ -70,6 +72,10 @@ public class GradeChooseXuenianXueqiView extends FrameLayout {
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (TextUtils.isEmpty(xuenianName) || TextUtils.isEmpty(xueqiName)) {
+                    Toast.makeText(mContext, "学年或学期不能为空", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 EnentBusTableBean enentBusTableBean = new EnentBusTableBean(xuenianName, xueqiName);
                 Message obtain = Message.obtain();
                 obtain.what = Constants.CLASS_TABLE_DIF;

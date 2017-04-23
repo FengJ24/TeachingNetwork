@@ -23,6 +23,11 @@
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
 
     <application
@@ -33,7 +38,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".UI.MainActivity"
+            android:name=".UI.WelcomeActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action
@@ -45,6 +50,12 @@
         </activity>
         <activity
             android:name=".UI.LoginActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".UI.AuthorActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".UI.MainActivity"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".UI.TeachPlanActivity"
@@ -67,6 +78,9 @@
         <activity
             android:name=".UI.NewsFragmentCaterogyActivity"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".UI.EmploymentActivity"
+            android:screenOrientation="portrait"/>
         <!--qq分享-->
         <activity
             android:name="com.tencent.tauth.AuthActivity"
@@ -76,13 +90,17 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="tencent1106103606" />
+                <data android:scheme="tencent1106117180" />
             </intent-filter>
         </activity>
         <activity android:name="com.tencent.connect.common.AssistActivity"
                   android:theme="@android:style/Theme.Translucent.NoTitleBar"
                   android:configChanges="orientation|keyboardHidden|screenSize"
             />
+        <!--微信分享-->
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:exported="true"/>
 
         <!-- Required SDK核心功能-->
         <activity

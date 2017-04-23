@@ -22,18 +22,24 @@ import java.util.List;
 public class TeachNificationRecycleAdapter extends RecyclerView.Adapter<TeachNificationRecycleAdapter.ViewHolder> {
     private List<TeachNotificationBean> mContent;
     private Context mContext;
+    private String mType;
 
-    public TeachNificationRecycleAdapter(List<TeachNotificationBean> content, Context context) {
+    public TeachNificationRecycleAdapter(List<TeachNotificationBean> content, Context context, String type) {
         mContent = content;
         mContext = context;
+        mType = type;
     }
 
 
     @Override
     public TeachNificationRecycleAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View inflate = LayoutInflater.from(mContext).inflate(R.layout.item_teachnitification, parent,false);
+        View inflate = LayoutInflater.from(mContext).inflate(R.layout.item_teachnitification, parent, false);
         ViewHolder viewHolder = new ViewHolder(inflate);
         return viewHolder;
+    }
+
+    public void setData(List<TeachNotificationBean> content) {
+        mContent = content;
     }
 
     @Override
@@ -45,6 +51,7 @@ public class TeachNificationRecycleAdapter extends RecyclerView.Adapter<TeachNif
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, TeachNitificationActivity.class);
                 intent.putExtra(Constants.TEACH_NOTIFICATION_URL, mContent.get(position).getUrl());
+                intent.putExtra("type", mType);
                 mContext.startActivity(intent);
             }
         });

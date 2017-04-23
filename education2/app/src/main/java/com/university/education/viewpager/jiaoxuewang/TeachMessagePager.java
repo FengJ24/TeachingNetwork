@@ -140,16 +140,18 @@ public class TeachMessagePager extends BasePager {
         List<TeachNotificationBean> newAdapterContent = content;
         if (isLoadMore) {
             if (mTeachNificationRecycleAdapter != null) {
+                mTeachNificationRecycleAdapter.setData(content);
                 mTeachNificationRecycleAdapter.notifyDataSetChanged();
             }else{
-                mTeachNificationRecycleAdapter = new TeachNificationRecycleAdapter(newAdapterContent, mActivity);
+                mTeachNificationRecycleAdapter = new TeachNificationRecycleAdapter(newAdapterContent, mActivity,"教学信息");
                 mRefreshLoadMoreListView.setAdapter(mTeachNificationRecycleAdapter);
             }
         } else {
             if (mTeachNificationRecycleAdapter != null) {
+                mTeachNificationRecycleAdapter.setData(content);
                 mTeachNificationRecycleAdapter.notifyDataSetChanged();
             }else{
-                mTeachNificationRecycleAdapter = new TeachNificationRecycleAdapter(newAdapterContent, mActivity);
+                mTeachNificationRecycleAdapter = new TeachNificationRecycleAdapter(newAdapterContent, mActivity,"教学信息");
                 mRefreshLoadMoreListView.setAdapter(mTeachNificationRecycleAdapter);
             }
         }

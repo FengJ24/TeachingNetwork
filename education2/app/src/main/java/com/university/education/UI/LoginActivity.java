@@ -6,6 +6,8 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -39,17 +41,36 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             super.handleMessage(msg);
         }
     };
+    private CheckBox checkbox_login;
 
 
     @Override
     public void initListener() {
+        checkbox_login.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                PreferenceUtils.putBoolean(LoginActivity.this, "isStorePassWord", isChecked);
+            }
+        });
     }
 
     @Override
     public void initData(TextView base_name, ImageView base_activity_pic, ImageView base_activity_back) {
         base_name.setText("登录");
         showContentView();
+        Boolean isStorePassWord = PreferenceUtils.getBoolean(LoginActivity.this, "isStorePassWord");
+        if (isStorePassWord) {
+            username.setText(PreferenceUtils.getString(LoginActivity.this, "acount"));
+            String password = PreferenceUtils.getString(LoginActivity.this, "password1");
+            String password2 = PreferenceUtils.getString(LoginActivity.this, Constants.PASSWORD);
+            this.password.setText(password);
+            checkbox_login.setChecked(true);
+        } else {
+            username.setText("");
+            password.setText("");
+            checkbox_login.setChecked(false);
+        }
         base_activity_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,6 +86,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         username = (EditText) inflate.findViewById(R.id.username);
         password = (EditText) inflate.findViewById(R.id.password);
         login = (Button) inflate.findViewById(R.id.login);
+        checkbox_login = (CheckBox) inflate.findViewById(R.id.checkbox_login);
         login.setOnClickListener(this);
 
         return inflate;
@@ -100,6 +122,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     //登录成功,将账号和密码存储
                     PreferenceUtils.putString(LoginActivity.this, Constants.USERNAME, mUsernameString);
                     PreferenceUtils.putString(LoginActivity.this, Constants.PASSWORD, mPasswordString);
+
+                    PreferenceUtils.putString(LoginActivity.this, "acount", mUsernameString);
+                    PreferenceUtils.putString(LoginActivity.this, "password1", mPasswordString);
                     //学号和姓名
                     Elements select = document.select("div.info");
                     Elements userInfo = select.select("span#xhxm");
@@ -119,13 +144,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         // validate
         mUsernameString = username.getText().toString().trim();
         if (TextUtils.isEmpty(mUsernameString)) {
-            Toast.makeText(this, "学号", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "学号不能为空", Toast.LENGTH_SHORT).show();
             return;
         }
 
         mPasswordString = password.getText().toString().trim();
         if (TextUtils.isEmpty(mPasswordString)) {
-            Toast.makeText(this, "密码", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "密码不能为空", Toast.LENGTH_SHORT).show();
             return;
         }
     }

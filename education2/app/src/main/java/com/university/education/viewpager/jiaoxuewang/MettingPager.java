@@ -142,16 +142,18 @@ public class MettingPager extends BasePager {
         List<TeachNotificationBean> newAdapterContent = adapterContent;
         if (isLoadMore) {
             if (mTeachNificationRecycleAdapter != null) {
+                mTeachNificationRecycleAdapter.setData(adapterContent);
                 mTeachNificationRecycleAdapter.notifyDataSetChanged();
             }else{
-                mTeachNificationRecycleAdapter = new TeachNificationRecycleAdapter(adapterContent, mActivity);
+                mTeachNificationRecycleAdapter = new TeachNificationRecycleAdapter(adapterContent, mActivity,"报告会");
                 mRefreshLoadMoreListView.setAdapter(mTeachNificationRecycleAdapter);
             }
         } else {
             if (mTeachNificationRecycleAdapter != null) {
+                mTeachNificationRecycleAdapter.setData(adapterContent);
                 mTeachNificationRecycleAdapter.notifyDataSetChanged();
             }else{
-                mTeachNificationRecycleAdapter = new TeachNificationRecycleAdapter(adapterContent, mActivity);
+                mTeachNificationRecycleAdapter = new TeachNificationRecycleAdapter(adapterContent, mActivity,"报告会");
                 mRefreshLoadMoreListView.setAdapter(mTeachNificationRecycleAdapter);
             }
         }

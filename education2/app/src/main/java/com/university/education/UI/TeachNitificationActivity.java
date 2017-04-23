@@ -59,6 +59,7 @@ public class TeachNitificationActivity extends BaseActivity implements View.OnCl
     private FloatingActionButton share;
     private String mTitle;
     private Tencent mTencent;
+    private String mType;
 
 
     @Override
@@ -75,6 +76,7 @@ public class TeachNitificationActivity extends BaseActivity implements View.OnCl
         mTencent = Tencent.createInstance("1106103606", this.getApplicationContext());
         Intent intent = getIntent();
         mUrl = intent.getStringExtra(Constants.TEACH_NOTIFICATION_URL);
+        mType = intent.getStringExtra("type");
         getDetailData(mUrl);
         base_activity_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,6 +85,7 @@ public class TeachNitificationActivity extends BaseActivity implements View.OnCl
             }
         });
     }
+
 
 
     @Override
@@ -274,7 +277,9 @@ public class TeachNitificationActivity extends BaseActivity implements View.OnCl
      */
     private void share() {
         ShareDailog shareDailog = new ShareDailog(this);
-        shareDailog.setData(new ShareBean(mUrl,mTitle,Constants.JIAOXUEWANG_SHARE));
+        ShareBean shareBean = new ShareBean(mUrl, mTitle, Constants.JIAOXUEWANG_SHARE);
+        shareBean.setType(mType);
+        shareDailog.setData(shareBean);
         shareDailog.show();
 
     }

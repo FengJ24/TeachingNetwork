@@ -20,7 +20,7 @@
             android:layout_height="48dp"
             android:layout_gravity="bottom|right"
             android:layout_margin="40dp"
-            android:src="@drawable/new_live_settings"/>
+            android:src="@drawable/share"/>
     </FrameLayout>
 
 </LinearLayout>

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.university.education.R;
 import com.university.education.adapter.ChooseTermAdapter;
@@ -67,6 +69,10 @@ public class DifClassTableDailog extends Dialog {
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (TextUtils.isEmpty(xuenianName) || TextUtils.isEmpty(xueqiName)) {
+                    Toast.makeText(mContext, "学年或学期不能为空", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 EnentBusTableBean enentBusTableBean = new EnentBusTableBean(xuenianName, xueqiName);
                 Message obtain = Message.obtain();
                 obtain.what = Constants.CLASS_TABLE_DIF;

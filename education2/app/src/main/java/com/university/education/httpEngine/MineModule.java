@@ -140,7 +140,7 @@ public class MineModule {
                 .addFormDataPart("ddlXN", xuenian)
                 .addFormDataPart("ddlXQ", xueqi)
                 .addFormDataPart("ddl_kcxz", "")
-                .addFormDataPart("btn_zcj", type).build();
+                .addFormDataPart("btn_xq", type).build();
         Request.Builder builde = new Request.Builder().url(HttpApi.BASE + Constants.STUDENT_GRADE + "xh=" + xuehao + "&xm=" + name + Constants.STUDENT_GRADE_ID)
                 .post(muiltipartBody);
         Request request = builde.addHeader("Referer", encodeHeadInfo(url)).build();
